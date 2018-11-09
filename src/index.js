@@ -1,7 +1,7 @@
 import loadComponents from './components';
 import loadBlocks from './blocks';
 
-export default grapesjs.plugins.add('grapesjs-simple-lp', (editor, opts = {}) => {
+export default grapesjs.plugins.add('grapesjs-plugin-carousel', (editor, opts = {}) => {
 
     const options = {...{
                 prefixName: 'bst-carousel',
