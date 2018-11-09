@@ -8,6 +8,8 @@ export default grapesjs.plugins.add('grapesjs-simple-lp', (editor, opts = {}) =>
                 
                 gridsCategory: 'Extra',
                 
+                autoplay: true,
+                
                 interval: 5000,
                 
                 slides: 3

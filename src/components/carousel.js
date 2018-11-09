@@ -12,8 +12,14 @@ export default (editor, config = {}) => {
             ...defaultModel.prototype.defaults,
             interval: config.interval,
             slides: config.slides,
+            autoplay: config.autoplay,
             droppable: false,
             traits: [{
+                    label: 'Auto play',
+                    name: 'autoplay',
+                    changeProp: 1,
+                    type: 'checkbox'
+                }, {
                     label: 'Interval',
                     name: 'interval',
                     changeProp: 1,
@@ -236,14 +242,13 @@ export default (editor, config = {}) => {
                                     var $this = $(this)
                                     var data = $this.data('bs.carousel')
                                     var options = Carousel.DEFAULTS
-                                    var action = null
 
                                     if (!data)
                                         $this.data('bs.carousel', (data = new Carousel(this, options)))
                                     if (typeof option === 'number')
                                         data.setInterval(option)
-                                    else if (action)
-                                        data[action]()
+                                    else if (typeof option === 'string')
+                                        data[option]()
                                     else if (options.interval)
                                         data.pause().cycle()
                                 })
@@ -360,6 +365,12 @@ export default (editor, config = {}) => {
 
                     jQuery(`#${id}`).carousel();
                     jQuery(`#${id}`).carousel(parseInt('{[ interval ]}'));
+                    
+                    let autoPlay = Boolean('{[ autoplay ]}');
+                    if (false === autoPlay) {
+                        // The carousel is moving by default.
+                        jQuery(`#${id}`).carousel('pause');
+                    }
                 };
 
                 if (typeof jQuery === 'undefined') {
@@ -385,13 +396,13 @@ export default (editor, config = {}) => {
 
     var view = defaultView.extend({
         init() {
-            this.listenTo(this.model, 'change:interval', this.updateScript);
+            this.listenTo(this.model, 'change:interval change:autoplay', this.updateScript);
             this.listenTo(this.model, 'change:slides', this.updateNumSlides);
         },
 
         updateNumSlides() {
             const comps = this.model.get('components');
-            
+
             console.log(comps);
 
 //                // Add a basic countdown template if it's not yet initialized
