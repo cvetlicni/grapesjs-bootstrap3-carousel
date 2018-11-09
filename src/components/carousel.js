@@ -1,3 +1,4 @@
+import {compIndicatorName, compSlideName} from '../consts';
 export default (editor, config = {}) => {
     const domc = editor.DomComponents;
     const defaultType = domc.getType('default');
@@ -11,9 +12,12 @@ export default (editor, config = {}) => {
         defaults: {
             ...defaultModel.prototype.defaults,
             interval: config.interval,
+            droppable: false,
+
             slides: config.slides,
             autoplay: config.autoplay,
-            droppable: false,
+            moveTo: null, // To move left or right
+
             traits: [{
                     label: 'Auto play',
                     name: 'autoplay',
@@ -241,23 +245,25 @@ export default (editor, config = {}) => {
                                 return this.each(function () {
                                     var $this = $(this)
                                     var data = $this.data('bs.carousel')
-                                    var options = Carousel.DEFAULTS
+//                                    var options = Carousel.DEFAULTS
+                                    var options = $.extend({}, Carousel.DEFAULTS, $this.data(), option);
+                                    var action = typeof option === 'string' ? option : options.slide;
 
                                     if (!data)
-                                        $this.data('bs.carousel', (data = new Carousel(this, options)))
+                                        $this.data('bs.carousel', (data = new Carousel(this, options)));
                                     if (typeof option === 'number')
-                                        data.setInterval(option)
-                                    else if (typeof option === 'string')
-                                        data[option]()
+                                        data.setInterval(option);
+                                    else if (typeof action === 'string')
+                                        data[action]();
                                     else if (options.interval)
-                                        data.pause().cycle()
+                                        data.pause().cycle();
                                 })
                             }
 
-                            var old = $.fn.carousel
+                            var old = $.fn.carousel;
 
-                            $.fn.carousel = Plugin
-                            $.fn.carousel.Constructor = Carousel
+                            $.fn.carousel = Plugin;
+                            $.fn.carousel.Constructor = Carousel;
 
 
                             // CAROUSEL NO CONFLICT
@@ -365,12 +371,16 @@ export default (editor, config = {}) => {
 
                     jQuery(`#${id}`).carousel();
                     jQuery(`#${id}`).carousel(parseInt('{[ interval ]}'));
-                    
+                    jQuery(`#${id}`).carousel('pause');
+
                     let autoPlay = Boolean('{[ autoplay ]}');
-                    if (false === autoPlay) {
+                    if (true === autoPlay) {
                         // The carousel is moving by default.
-                        jQuery(`#${id}`).carousel('pause');
+                        jQuery(`#${id}`).carousel('cycle');
                     }
+
+                    let moveTo = '{[ moveTo ]}';
+                    moveTo && jQuery(`#${id}`).carousel(moveTo);
                 };
 
                 if (typeof jQuery === 'undefined') {
@@ -395,22 +405,53 @@ export default (editor, config = {}) => {
 
 
     var view = defaultView.extend({
+        events: {
+            click: 'click'
+        },
+
         init() {
-            this.listenTo(this.model, 'change:interval change:autoplay', this.updateScript);
+            this.listenTo(this.model, 'change:interval change:autoplay change:moveTo', this.updateScript);
             this.listenTo(this.model, 'change:slides', this.updateNumSlides);
+        },
+
+        click(event) {
+            const _class = event.target.getAttribute('class').split(' ');
+
+            if (_class.includes('carousel-indicators') || _class.includes('carousel-control')) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                editor.select(this.model);
+            }
+
+            if (_class.includes('carousel-control') && _class.includes('left')) {
+                // Move left
+                this.model.set('moveTo', 'prev');
+                this.model.set('moveTo', null);
+            }
+
+            if (_class.includes('carousel-control') && _class.includes('right')) {
+                // Move right
+                this.model.set('moveTo', 'next');
+                this.model.set('moveTo', null);
+            }
         },
 
         updateNumSlides() {
             const comps = this.model.get('components');
 
-            console.log(comps);
+            const nSlides = this.model.get('slides');
 
-//                // Add a basic countdown template if it's not yet initialized
-//                if (!comps.length) {
-//                    comps.reset();
-//                    comps.add(``);
-//                }
-//
+            const autoplay = this.model.get('autoplay');
+
+            // Stop the carousel.
+            autoplay && this.model.set('autoplay', false);
+
+            // Add/Remove slides. Change the active class to 0.
+            comps.models.forEach(m => m.set('carouselSlides', nSlides));
+
+            // Start the carousel.
+            autoplay && this.model.set('autoplay', true);
         }
     });
 

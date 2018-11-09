@@ -1,18 +1,20 @@
+import {compIndicatorName, compBaseName} from '../consts';
+
 export default (editor, config = {}) => {
     const domc = editor.DomComponents;
-    const defaultType = domc.getType('default');
+    const baseType = domc.getType(compBaseName);
 
-    const defaultModel = defaultType.model;
-    const defaultView = defaultType.view;
+    const baseModel = baseType.model;
+    const baseView = baseType.view;
 
-    const TYPE = 'carousel-indicator';
-    
-    var model = defaultModel.extend({
+    const TYPE = compIndicatorName;
+
+    var model = baseModel.extend({
         defaults: {
-            ...defaultModel.prototype.defaults,
-            droppable: false,
+            ...baseModel.prototype.defaults,
             traits: []
-        }
+        },
+
     }, {
         isComponent(el) {
 
@@ -24,9 +26,27 @@ export default (editor, config = {}) => {
     });
 
 
-    var view = defaultView.extend({
+    var view = baseView.extend({
         init() {
-            console.log(TYPE)
+            this.listenTo(this.model, 'change:carouselSlides', this.updateSlides);
+        },
+
+        updateSlides() {
+            const comps = this.model.get('components');
+
+            const n = parseInt(this.model.get('carouselSlides'));
+            
+            const id = this.el.id;
+            
+            var output = '';
+            
+            [...Array(n).keys()].forEach((i) => {
+                let _c = i === 0 ? 'active': '';
+                output += `<li data-target="#${id}" data-slide-to="${i}" class="${_c}"></li>`;
+            });
+
+            comps.reset();
+            comps.add(output);
         }
     });
 

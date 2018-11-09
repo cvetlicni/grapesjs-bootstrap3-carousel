@@ -1,16 +1,17 @@
+import {compControlName, compBaseName} from '../consts';
+
 export default (editor, config = {}) => {
     const domc = editor.DomComponents;
-    const defaultType = domc.getType('default');
+    const defaultType = domc.getType(compBaseName);
 
     const defaultModel = defaultType.model;
     const defaultView = defaultType.view;
 
-    const TYPE = 'carousel-control';
+    const TYPE = compControlName;
 
     var model = defaultModel.extend({
         defaults: {
             ...defaultModel.prototype.defaults,
-            droppable: false,
             traits: []
         }
     }, {
@@ -26,8 +27,16 @@ export default (editor, config = {}) => {
 
     var view = defaultView.extend({
         init() {
-            console.log(TYPE)
-        }
+
+        },
+
+        events: {
+            click: 'click'
+        },
+
+        click(event) {
+            event.preventDefault();
+        },
     });
 
     domc.addType(TYPE, {
