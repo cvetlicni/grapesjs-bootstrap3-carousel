@@ -254,7 +254,7 @@ export default (editor, config = {}) => {
                                     if (typeof option === 'number')
                                         data.setInterval(option);
                                     else if (typeof action === 'string')
-                                        data[action]();
+                                        data[action] && data[action]();
                                     else if (options.interval)
                                         data.pause().cycle();
                                 })
