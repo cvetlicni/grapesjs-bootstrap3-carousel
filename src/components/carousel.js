@@ -5,7 +5,7 @@ export default (editor, config = {}) => {
     const defaultModel = defaultType.model;
     const defaultView = defaultType.view;
 
-    const CAROUSEL_TYPE = 'carousel';
+    const TYPE = 'carousel';
 
     var model = defaultModel.extend({
         defaults: {
@@ -98,9 +98,9 @@ export default (editor, config = {}) => {
                                 e || (this.paused = false)
 
                                 this.interval && clearInterval(this.interval)
-                                
+
                                 this.options.interval = interval || this.options.interval;
-                                
+
                                 this.options.interval
                                         && !this.paused
                                         && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
@@ -123,8 +123,8 @@ export default (editor, config = {}) => {
                                 var itemIndex = (activeIndex + delta) % this.$items.length
                                 return this.$items.eq(itemIndex)
                             }
-                            
-                            Carousel.prototype.setInterval = function(i){
+
+                            Carousel.prototype.setInterval = function (i) {
                                 this.cycle(null, i);
                             }
 
@@ -357,7 +357,7 @@ export default (editor, config = {}) => {
                             })
                         })(jQuery);
                     }
-                    
+
                     jQuery(`#${id}`).carousel();
                     jQuery(`#${id}`).carousel(parseInt('{[ interval ]}'));
                 };
@@ -376,7 +376,7 @@ export default (editor, config = {}) => {
         isComponent(el) {
 
             if (el.tagName === 'DIV' && el.className.includes(config.prefixName) && el.getAttribute && el.getAttribute('data-type') === config.prefixName) {
-                return {type: CAROUSEL_TYPE};
+                return {type: TYPE};
             }
             return '';
         }
@@ -386,9 +386,14 @@ export default (editor, config = {}) => {
     var view = defaultView.extend({
         init() {
             this.listenTo(this.model, 'change:interval', this.updateScript);
+            this.listenTo(this.model, 'change:slides', this.updateNumSlides);
+        },
 
-//                const comps = this.model.get('components');
-//
+        updateNumSlides() {
+            const comps = this.model.get('components');
+            
+            console.log(comps);
+
 //                // Add a basic countdown template if it's not yet initialized
 //                if (!comps.length) {
 //                    comps.reset();
@@ -398,7 +403,7 @@ export default (editor, config = {}) => {
         }
     });
 
-    domc.addType(CAROUSEL_TYPE, {
+    domc.addType(TYPE, {
 
         model: model,
 

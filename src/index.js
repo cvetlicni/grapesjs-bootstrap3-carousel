@@ -8,7 +8,7 @@ export default grapesjs.plugins.add('grapesjs-simple-lp', (editor, opts = {}) =>
                 
                 gridsCategory: 'Extra',
                 
-                interval: 13000,
+                interval: 5000,
                 
                 slides: 3
         }, ...opts};

@@ -11,14 +11,14 @@ export default (editor, config = {}) => {
         content: `
                 <div class="${config.prefixName} carousel slide" data-ride="carousel" data-type="${config.prefixName}">
                     <!-- Indicators -->
-                    <ol class="carousel-indicators">
+                    <ol class="carousel-indicators" data-type="${config.prefixName}-indicators">
                         <li data-target="#" data-slide-to="0" class="active"></li>
                         <li data-target="#" data-slide-to="1"></li>
                         <li data-target="#" data-slide-to="2"></li>
                     </ol>
 
                     <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
+                    <div class="carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
                         <div class="item active">
                             <img src="${slideImgOne}" alt="..." />
                             <div class="carousel-caption"> 

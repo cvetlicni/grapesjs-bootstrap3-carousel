@@ -5,8 +5,8 @@ export default (editor, config = {}) => {
     const defaultModel = defaultType.model;
     const defaultView = defaultType.view;
 
-    const TYPE = 'carousel-slide';
-    
+    const TYPE = 'carousel-control';
+
     var model = defaultModel.extend({
         defaults: {
             ...defaultModel.prototype.defaults,
@@ -16,7 +16,7 @@ export default (editor, config = {}) => {
     }, {
         isComponent(el) {
 
-            if (el.tagName === 'DIV' && el.className.includes('carousel-inner') && el.getAttribute && el.getAttribute('data-type') === `${config.prefixName}-slides`) {
+            if (el.tagName === 'A' && el.className.includes('carousel-control')) {
                 return {type: TYPE};
             }
             return '';
