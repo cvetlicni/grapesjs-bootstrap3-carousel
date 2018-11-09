@@ -84,7 +84,7 @@ export default (editor, config = {}) => {
                                 interval: '{[ interval ]}',
                                 pause: 'hover',
                                 wrap: true,
-                                keyboard: true
+                                keyboard: false
                             }
 
                             Carousel.prototype.keydown = function (e) {
