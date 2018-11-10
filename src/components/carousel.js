@@ -369,7 +369,7 @@ export default (editor, config = {}) => {
                         })(jQuery);
                     }
 
-                    jQuery(`#${id}`).carousel();
+                    jQuery(`#${id}`).carousel({keyboard: false});
                     jQuery(`#${id}`).carousel(parseInt('{[ interval ]}'));
                     jQuery(`#${id}`).carousel('pause');
 
