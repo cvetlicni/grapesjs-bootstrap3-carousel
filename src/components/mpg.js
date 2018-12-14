@@ -8,6 +8,8 @@ export default (editor, config = {}) => {
 
     const TYPE = 'mpgGallery';
 
+    var $ = editor.$;
+
     var model = defaultModel.extend({
 
         defaults: {
@@ -78,19 +80,6 @@ export default (editor, config = {}) => {
         }
     });
 
-    /*
-     * Events to handle:
-     * 
-     * component:clone Could be clone one img
-     * canvas:drop Could be reorder one img
-     * 
-     * sorter:drag:start / sorter:drag:end Could be the sort event
-     * component:remove Remove an img from the mpg
-     * 
-     * We should call the scriptUpdated againg to update the MPG library
-     * 
-     */
-
     let getDoc = () => {
         var iframes = document.querySelectorAll("iframe.gjs-frame");
 
@@ -119,8 +108,6 @@ export default (editor, config = {}) => {
                 return;
             }
 
-            let $ = editor.$;
-
             let w = getWin(getDoc());
 
             let width = $(event.target).css('width');
@@ -135,7 +122,7 @@ export default (editor, config = {}) => {
             $(event.target).css('opacity', '1');
             $(event.target).css('width', width);
             $(event.target).css('height', height);
-            
+
             $(this.el).find('.m-p-g__controls').css('display', 'none');
             $(this.el).find('.m-p-g__fullscreen').css('display', 'none');
         }
@@ -147,4 +134,33 @@ export default (editor, config = {}) => {
 
         view: view
     });
+
+    /*
+     * Events to handle:
+     * 
+     * component:clone Could be clone one img
+     * canvas:drop Could be reorder one img
+     * 
+     * sorter:drag:start / sorter:drag:end Could be the sort event
+     * component:remove Remove an img from the mpg
+     * 
+     * preview event should show the library the way it is.
+     * 
+     * We should call the scriptUpdated againg to update the MPG library
+     * 
+     */
+
+    let updateScript = (model) => {
+        let parent = typeof model.parent === 'function' ? model.parent() : null;
+        let mpg = parent ? parent.parent() || parent : null;
+
+        if (mpg && mpg.is(TYPE) && mpg.view && mpg.view.updateScript) {
+            mpg.view.updateScript();
+        }
+    };
+
+    editor.on('component:clone', updateScript);
+    editor.on('component:remove', updateScript);
+    editor.on('canvas:drop', () => editor.getSelected() && updateScript(editor.getSelected()));
+    editor.on('sorter:drag:end', () => editor.getSelected() && updateScript(editor.getSelected()));
 }
