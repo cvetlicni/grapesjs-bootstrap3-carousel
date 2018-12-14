@@ -161,6 +161,6 @@ export default (editor, config = {}) => {
 
     editor.on('component:clone', updateScript);
     editor.on('component:remove', updateScript);
-    editor.on('canvas:drop', () => editor.getSelected() && updateScript(editor.getSelected()));
+    editor.on('canvas:drop', (dataTransfer, model) => updateScript(model));
     editor.on('sorter:drag:end', () => editor.getSelected() && updateScript(editor.getSelected()));
 }
