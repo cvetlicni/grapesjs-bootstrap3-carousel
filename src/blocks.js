@@ -63,7 +63,7 @@ export default (editor, config = {}) => {
         category: config.gridsCategory,
         content: `
                 <div class="${config.prefixName}-m-p-g" data-type="mpg-gallery" style="display: block;overflow: auto;">
-			<div class="m-p-g__thumbs" data-google-image-layout data-max-height="350">
+			<div class="m-p-g__thumbs" data-google-image-layout data-max-height="350" style="display: block;overflow: auto;">
 				<img src="http://unsplash.it/600/400?image=940" data-full="http://unsplash.it/1200/800?image=940" class="m-p-g__thumbs-img" />
 				<img src="http://unsplash.it/640/450?image=906" data-full="http://unsplash.it/1280/900?image=906" class="m-p-g__thumbs-img" />
 				<img src="http://unsplash.it/550/420?image=885" data-full="http://unsplash.it/1100/840?image=885" class="m-p-g__thumbs-img" />
@@ -79,6 +79,6 @@ export default (editor, config = {}) => {
 			<div class="m-p-g__fullscreen"></div>
 		</div>
             `,
-        attributes: {class: 'fa fa-sliders'}
+        attributes: {class: 'fa fa-th-large'}
     });
 }

@@ -143,6 +143,9 @@ export default (editor, config = {}) => {
      * 
      * sorter:drag:start / sorter:drag:end Could be the sort event
      * component:remove Remove an img from the mpg
+     * component:update:src Update the image's source
+     * 
+     * when change the image source inside the mpg gallery.
      * 
      * preview event should show the library the way it is.
      * 
@@ -161,6 +164,7 @@ export default (editor, config = {}) => {
 
     editor.on('component:clone', updateScript);
     editor.on('component:remove', updateScript);
+    editor.on('component:update:src', updateScript);
     editor.on('canvas:drop', (dataTransfer, model) => updateScript(model));
     editor.on('sorter:drag:end', () => editor.getSelected() && updateScript(editor.getSelected()));
 }
