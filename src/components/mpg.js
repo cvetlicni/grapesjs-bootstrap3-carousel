@@ -33,6 +33,9 @@ export default (editor, config = {}) => {
                                 e.style.opacity = 1;
                                 e.classList.remove('hide');
                                 e.setAttribute('data-full', e.getAttribute('src'));
+                                if (!e.classList.contains('m-p-g__thumbs-img')) {
+                                    e.classList.add('m-p-g__thumbs-img')
+                                }
                             });
                             return;
                         }
@@ -137,7 +140,7 @@ export default (editor, config = {}) => {
 
             $(this.el).find('.m-p-g__controls').css('display', 'none');
             $(this.el).find('.m-p-g__fullscreen').css('display', 'none');
-            
+
             // Refresh the MPG again. The photos were losing the right size. With this fix
             // The mph will force the photos to the right size.
             this.updateScript();
