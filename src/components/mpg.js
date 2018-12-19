@@ -32,6 +32,7 @@ export default (editor, config = {}) => {
                             elem.querySelectorAll('img').forEach(e => {
                                 e.style.opacity = 1;
                                 e.classList.remove('hide');
+                                e.setAttribute('data-full', e.getAttribute('src'));
                             });
                             return;
                         }
