@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-plugin-carousel",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "GrapesJS Plugin Bootstrap Carousel",
   "main": "dist/grapesjs-plugin-carousel.min.js",
   "scripts": {

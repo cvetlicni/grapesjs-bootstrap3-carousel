@@ -100,6 +100,13 @@ export default (editor, config = {}) => {
             click: 'click'
         },
 
+        init() {
+            var self = this;
+            // Wait for the view to finish the animation.
+            // Only update the PMG when the animation is completed.
+//            this.listenTo(editor.editor, 'change:device', ()=>setTimeout( self.updateScript , 1000));
+        },
+
         click(event) {
             event.preventDefault();
             event.stopPropagation();
@@ -125,6 +132,10 @@ export default (editor, config = {}) => {
 
             $(this.el).find('.m-p-g__controls').css('display', 'none');
             $(this.el).find('.m-p-g__fullscreen').css('display', 'none');
+            
+            // Refresh the MPG again. The photos were losing the right size. With this fix
+            // The mph will force the photos to the right size.
+            this.updateScript();
         }
     });
 
