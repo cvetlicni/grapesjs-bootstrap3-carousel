@@ -28,7 +28,11 @@ export default (editor, config = {}) => {
                     var elem = document.getElementById(id);
                     try {
                         if (MaterialPhotoGallery && elem) {
-                            var gallery = new MaterialPhotoGallery(elem);
+                            new MaterialPhotoGallery(elem);
+                            elem.querySelectorAll('img').forEach(e => {
+                                e.style.opacity = 1;
+                                e.classList.remove('hide');
+                            });
                             return;
                         }
 
@@ -42,7 +46,7 @@ export default (editor, config = {}) => {
                 };
 
                 var script = document.querySelector('script[src="{[ jsSrc ]}"]');
-                var style = document.querySelector('script[src="{[ cssSrc ]}"]');
+                var style = document.querySelector('link[href="{[ cssSrc ]}"]');
 
                 var races = [];
 
