@@ -8,7 +8,6 @@ export default (editor, config = {}) => {
     const defaultView = defaultType.view;
 
     const TYPE = compSlideName;
-
     var model = defaultModel.extend({
         defaults: {
             ...defaultModel.prototype.defaults,
@@ -28,7 +27,39 @@ export default (editor, config = {}) => {
 
     var view = defaultView.extend({
         init() {
-            this.listenTo(this.model, 'change:carouselSlides', this.updateSlides);
+            this.listenTo(this.model.components(), 'add', this.addSlide);
+            this.listenTo(this.model.components(), 'remove', this.removeSlide);
+            this.listenTo(this.model.parent(), 'change:slides', this.handleSlidesNumChange);
+            this.listenTo(this.model.parent(), 'change:showCaptions', this.toggleCaptions);
+        },
+
+        toggleCaptions() {
+            if (this.model.parent().get('showCaptions')) {
+                this.model.removeClass('caption-none');
+            } else {
+                this.model.addClass('caption-none');
+            }
+        },
+
+        addSlide() {
+            if (this.model.get('shouldRefresh')) {
+                this.model.parent().view.addSlide();
+            }
+        },
+
+        removeSlide() {
+            if (this.model.get('shouldRefresh')) {
+                this.resetActive(this.model.get('components'));
+                this.model.parent().view.removeSlide();
+            }
+        },
+
+        handleSlidesNumChange() {
+            this.model.set('shouldRefresh', false);
+            this.model.set('carouselSlides', this.model.parent().get('slides'));
+            this.updateSlides();
+            this.model.parent().view.updateNumSlides();
+            this.model.set('shouldRefresh', true);
         },
 
         updateSlides() {
@@ -47,7 +78,7 @@ export default (editor, config = {}) => {
             } else if (diff > 0) {
                 this.increse(comps, l);
             }
-            
+
             this.resetActive(comps);
         },
 
@@ -68,12 +99,12 @@ export default (editor, config = {}) => {
                 comps.add(output);
             });
         },
-        
+
         resetActive(comps){
             [...Array(comps.length).keys()].forEach((i) => {
                 comps.at(i).setClass('item');
             });
-            
+
             comps.at(0).addClass('active');
         }
     });

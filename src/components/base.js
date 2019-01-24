@@ -21,7 +21,10 @@ export default (editor, config = {}) => {
             stylable: false,
             layerable: false,
 
-            carouselSlides: 3
+            carouselSlides: 3,
+            shouldRefresh: true,
+            showCaptions: true,
+            showIndicator: true,
         },
 
     }, {

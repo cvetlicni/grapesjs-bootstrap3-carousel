@@ -7,7 +7,6 @@ export default (editor, config = {}) => {
     const defaultView = defaultType.view;
 
     const TYPE = 'carousel';
-
     var model = defaultModel.extend({
         defaults: {
             ...defaultModel.prototype.defaults,
@@ -16,6 +15,9 @@ export default (editor, config = {}) => {
 
             slides: config.slides,
             autoplay: config.autoplay,
+            showCaptions: config.showCaptions,
+            showIndicator: config.showIndicator,
+
             moveTo: null, // To move left or right
 
             traits: [{
@@ -33,6 +35,16 @@ export default (editor, config = {}) => {
                     name: 'slides',
                     changeProp: 1,
                     type: 'number'
+                }, {
+                    label: 'Captions',
+                    name: 'showCaptions',
+                    changeProp: 1,
+                    type: 'checkbox'
+                }, {
+                    label: 'Indicators',
+                    name: 'showIndicator',
+                    changeProp: 1,
+                    type: 'checkbox'
                 }],
             script: function () {
                 // Set the ID
@@ -405,13 +417,21 @@ export default (editor, config = {}) => {
 
 
     var view = defaultView.extend({
+
         events: {
             click: 'click'
         },
 
+        addSlide() {
+            this.model.set('slides', parseInt(this.model.get('slides')) + 1)
+        },
+
+        removeSlide() {
+            this.model.set('slides', parseInt(this.model.get('slides')) - 1)
+        },
+
         init() {
             this.listenTo(this.model, 'change:interval change:autoplay change:moveTo', this.updateScript);
-            this.listenTo(this.model, 'change:slides', this.updateNumSlides);
         },
 
         click(event) {

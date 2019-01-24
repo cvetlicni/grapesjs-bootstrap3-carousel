@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-plugin-carousel",
-  "version": "0.3.11",
+  "version": "0.0.0",
   "description": "GrapesJS Plugin Bootstrap Carousel",
   "main": "dist/grapesjs-plugin-carousel.min.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "plugin",
     "carousel"
   ],
-  "author": "Omar Martinez",
+  "author": "Omar Martinez, forked by Klemen Fajs",
   "license": "BSD-3-Clause",
   "babel": {
     "presets": [

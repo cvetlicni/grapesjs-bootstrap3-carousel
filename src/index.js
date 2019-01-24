@@ -16,6 +16,10 @@ export default grapesjs.plugins.add('grapesjs-plugin-carousel', (editor, opts = 
 
                 slides: 3,
 
+                showIndicator: true,
+
+                showCaptions: true,
+
                 mpgCss: 'https://ettrics.github.io/material-photo-gallery/dist/css/material-photo-gallery.css',
 
                 mpgJs: 'https://ettrics.github.io/material-photo-gallery/dist/js/material-photo-gallery.min.js'

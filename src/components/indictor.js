@@ -29,17 +29,27 @@ export default (editor, config = {}) => {
     var view = baseView.extend({
         init() {
             this.listenTo(this.model, 'change:carouselSlides', this.updateSlides);
+            this.listenTo(this.model.parent(), 'change:showIndicator', this.toggleIndicator);
+        },
+
+        toggleIndicator() {
+            const comps = this.model.get('components');
+            if (this.model.parent().get('showIndicator')) {
+                this.updateSlides();
+            } else {
+                comps.reset();
+            }
         },
 
         updateSlides() {
             const comps = this.model.get('components');
 
             const n = parseInt(this.model.get('carouselSlides'));
-            
+
             const id = this.el.id;
-            
+
             var output = '';
-            
+
             [...Array(n).keys()].forEach((i) => {
                 let _c = i === 0 ? 'active': '';
                 output += `<li data-target="#${id}" data-slide-to="${i}" class="${_c}"></li>`;
