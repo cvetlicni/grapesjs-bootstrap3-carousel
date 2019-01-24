@@ -9,6 +9,7 @@ export const
         compIndicatorName = 'carousel-indicator',
         compSlideName = 'carousel-slide',
         compControlName = 'carousel-control',
+        compCarouselName = 'ch-carousel',
 
         // Styles
         styleGen = function(name){

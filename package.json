@@ -1,7 +1,7 @@
 {
-  "name": "grapesjs-plugin-carousel",
-  "version": "0.0.0",
-  "description": "GrapesJS Plugin Bootstrap Carousel",
+  "name": "grapesjs-bootstrap3-carousel-plugin",
+  "version": "0.0.3",
+  "description": "GrapesJS Plugin Bootstrap3 Carousel -> forked repo @ https://github.com/omarmd1986/grapesjs-plugin-carousel.git",
   "main": "dist/grapesjs-plugin-carousel.min.js",
   "scripts": {
     "lint": "eslint src",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/omarmd1986/grapesjs-plugin-carousel.git"
+    "url": "https://github.com/cvetlicni/grapesjs-bootstrap3-carousel"
   },
   "keywords": [
     "grapesjs",

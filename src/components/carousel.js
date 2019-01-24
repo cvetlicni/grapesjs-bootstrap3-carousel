@@ -1,17 +1,33 @@
-import {compIndicatorName, compSlideName} from '../consts';
+import {
+    compIndicatorName,
+    compSlideName,
+    compCarouselName,
+    slideImgOne,
+    slideImgTwo,
+    slideImgThree,
+    styleGen
+} from '../consts';
 export default (editor, config = {}) => {
+    const style = styleGen(config.prefixName);
+
     const domc = editor.DomComponents;
     const defaultType = domc.getType('default');
 
     const defaultModel = defaultType.model;
     const defaultView = defaultType.view;
 
-    const TYPE = 'carousel';
     var model = defaultModel.extend({
         defaults: {
             ...defaultModel.prototype.defaults,
             interval: config.interval,
             droppable: false,
+
+            //  <div class="${config.prefixName} carousel slide" data-ride="carousel" data-type="${config.prefixName}">
+            attributes: {
+                class: `${config.prefixName} carousel slide`,
+                'data-ride': 'carousel',
+                'data-type': `${config.prefixName}`
+            },
 
             slides: config.slides,
             autoplay: config.autoplay,
@@ -407,9 +423,8 @@ export default (editor, config = {}) => {
         }
     }, {
         isComponent(el) {
-
             if (el.tagName === 'DIV' && el.className.includes(config.prefixName) && el.getAttribute && el.getAttribute('data-type') === config.prefixName) {
-                return {type: TYPE};
+                return {type: compCarouselName};
             }
             return '';
         }
@@ -432,6 +447,57 @@ export default (editor, config = {}) => {
 
         init() {
             this.listenTo(this.model, 'change:interval change:autoplay change:moveTo', this.updateScript);
+
+            const comps = this.model.components();
+
+            // Add a basic template if it's not yet initialized
+            if (!comps.length) {
+                comps.add(
+                    `
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators" data-type="${config.prefixName}-indicators">
+                        <li data-target="#" data-slide-to="0" class="active"></li>
+                        <li data-target="#" data-slide-to="1"></li>
+                        <li data-target="#" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
+                        <div class="item active">
+                            <img src="${slideImgOne}" alt="..." />
+                            <div class="carousel-caption"> 
+                               Slide 1
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="${slideImgTwo}" alt="..." />
+                            <div class="carousel-caption">
+                                Slide 2
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="${slideImgThree}" alt="..." />
+                            <div class="carousel-caption">
+                                Slide 3
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="${config.prefixName} left carousel-control" href="#" role="button" data-slide="prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 501.5 501.5" style="position: absolute;left: 40%;z-index: 5;top: calc(50% - 1.5rem);">
+                        <g><path fill="#2E435A" d="M302.67 90.877l55.77 55.508L254.575 250.75 358.44 355.116l-55.77 55.506L143.56 250.75z"/></g>
+                        </svg>
+                    </a>
+                    <a class="${config.prefixName} right carousel-control" href="#" role="button" data-slide="next">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 501.5 501.5" style="position: absolute;right: 40%;z-index: 5;top: calc(50% - 1.5rem)">
+                        <g><path fill="#2E435A" d="M199.33 410.622l-55.77-55.508L247.425 250.75 143.56 146.384l55.77-55.507L358.44 250.75z"/></g>
+                        </svg>
+                    </a>
+                    ${style}
+                    `
+                );
+            }
         },
 
         click(event) {
@@ -475,7 +541,7 @@ export default (editor, config = {}) => {
         }
     });
 
-    domc.addType(TYPE, {
+    domc.addType(compCarouselName, {
 
         model: model,
 

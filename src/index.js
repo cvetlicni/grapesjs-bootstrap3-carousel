@@ -1,14 +1,15 @@
 import loadComponents from './components';
 import loadBlocks from './blocks';
 
-export default grapesjs.plugins.add('grapesjs-plugin-carousel', (editor, opts = {}) => {
-
+export default grapesjs.plugins.add('grapesjs-bootstrap3-carousel-plugin', (editor, opts = {}) => {
     const options = {...{
-                blocks: ['carousel', 'mpg'],
+                carouselBlock: {},
+
+                mpgBlock: {},
 
                 prefixName: 'bst-carousel',
 
-                gridsCategory: 'Extra',
+                // gridsCategory: 'Extra',
 
                 autoplay: true,
 
