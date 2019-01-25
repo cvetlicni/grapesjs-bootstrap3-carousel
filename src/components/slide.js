@@ -92,7 +92,7 @@ export default (editor, config = {}) => {
             [...Array(n).keys()].forEach((i) => {
                 let output = `<div class="item carousel-item" data-gjs-type="slide">
                             <img src="${slideImgOne}" alt="..." />
-                            <div class="carousel-caption">
+                            <div class="carousel-caption" data-gjs-type="text">
                                 New Slide
                             </div>
                         </div>`;

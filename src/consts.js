@@ -23,11 +23,17 @@ export const
                         .${name} img {
                           vertical-align: middle;
                         }
+                        .${name}.flex-vertical .item {
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: center;
+                        }
                         .${name} .img-responsive,
                         .${name} .carousel-inner > .item > img,
                         .${name} .carousel-inner > .item > a > img {
                           display: block;
                           max-width: 100%;
+                          width: 100%;
                         }
                         .${name} .sr-only {
                           position: absolute;
@@ -65,7 +71,7 @@ export const
                           -o-transition: 0.6s ease-in-out left;
                           transition: 0.6s ease-in-out left;
                           min-height: 100px;
-                          margin: 20px 0;
+                          padding: 1px;
                         }
                         .${name} .carousel-inner > .item > img,
                         .${name} .carousel-inner > .item > a > img {
@@ -73,7 +79,7 @@ export const
                           display: block;
                           margin: auto;
                         }
-                         .${name}.caption-none > .item > .carousel-caption {
+                         .${name} .caption-none > .item > .carousel-caption {
                             display: none;
                         }
                         @media all and (transform-3d), (-webkit-transform-3d) {
@@ -172,6 +178,9 @@ export const
                           background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
                           background-repeat: repeat-x;
                           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+                        }
+                        .${name}.no-gradient-control .carousel-control.left, .${name} .carousel-control.right {
+                          background: none;
                         }
                         .${name} .carousel-control:hover,
                         .${name} .carousel-control:focus {

@@ -26,6 +26,8 @@ export default (editor, config = {}) => {
             autoplay: config.autoplay,
             showCaptions: config.showCaptions,
             showIndicator: config.showIndicator,
+            flexVertical: config.flexVertical,
+            hasGradient: config.hasGradient,
 
             moveTo: null, // To move left or right
 
@@ -52,6 +54,16 @@ export default (editor, config = {}) => {
             }, {
                 label: 'Indicators',
                 name: 'showIndicator',
+                changeProp: 1,
+                type: 'checkbox'
+            }, {
+                label: 'V-align flexbox',
+                name: 'flexVertical',
+                changeProp: 1,
+                type: 'checkbox'
+            }, {
+                label: 'Gradient on controls',
+                name: 'hasGradient',
                 changeProp: 1,
                 type: 'checkbox'
             }],
@@ -443,6 +455,8 @@ export default (editor, config = {}) => {
 
         init() {
             this.listenTo(this.model, 'change:interval change:autoplay change:moveTo', this.updateScript);
+            this.listenTo(this.model, 'change:flexVertical', this.handleVerticalAlign);
+            this.listenTo(this.model, 'change:hasGradient', this.handleGradient);
 
             const comps = this.model.components();
 
@@ -461,19 +475,19 @@ export default (editor, config = {}) => {
                     <div class="carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
                         <div class="item carousel-item active" data-gjs-type="slide">
                             <img src="${slideImgOne}" alt="..." />
-                            <div class="carousel-caption" data-gjs-type="caption"> 
+                            <div class="carousel-caption" data-gjs-type="text"> 
                                Slide 1
                             </div>
                         </div>
                         <div class="item carousel-item" data-gjs-type="slide">
                             <img src="${slideImgTwo}" alt="..." />
-                            <div class="carousel-caption" data-gjs-type="caption">
+                            <div class="carousel-caption" data-gjs-type="text">
                                 Slide 2
                             </div>
                         </div>
                         <div class="item carousel-item" data-gjs-type="slide">
                             <img src="${slideImgThree}" alt="..." />
-                            <div class="carousel-caption" data-gjs-type="caption">
+                            <div class="carousel-caption" data-gjs-type="text">
                                 Slide 3
                             </div>
                         </div>
@@ -493,6 +507,22 @@ export default (editor, config = {}) => {
                     ${style}
                     `
                 );
+            }
+        },
+
+        handleVerticalAlign() {
+            if (this.model.get('flexVertical')) {
+                this.model.removeClass('flex-vertical');
+            } else {
+                this.model.addClass('flex-vertical');
+            }
+        },
+
+        handleGradient() {
+            if (this.model.get('hasGradient')) {
+                this.model.removeClass('no-gradient-control');
+            } else {
+                this.model.addClass('no-gradient-control');
             }
         },
 

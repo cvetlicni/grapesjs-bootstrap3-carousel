@@ -19,6 +19,10 @@ export default grapesjs.plugins.add('grapesjs-bootstrap3-carousel-plugin', (edit
 
                 showIndicator: true,
 
+                flexVertical: false,
+
+                hasGradient: false,
+
                 showCaptions: true,
 
                 mpgCss: 'https://ettrics.github.io/material-photo-gallery/dist/css/material-photo-gallery.css',
