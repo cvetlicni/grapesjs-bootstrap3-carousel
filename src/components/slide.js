@@ -90,7 +90,7 @@ export default (editor, config = {}) => {
 
         increse(comps, n) {
             [...Array(n).keys()].forEach((i) => {
-                let output = `<div class="item">
+                let output = `<div class="item carousel-item" data-gjs-type="carousel">
                             <img src="${slideImgOne}" alt="..." />
                             <div class="carousel-caption">
                                 New Slide

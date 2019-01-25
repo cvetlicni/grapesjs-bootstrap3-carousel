@@ -463,19 +463,19 @@ export default (editor, config = {}) => {
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
-                        <div class="item active">
+                        <div class="item carousel-item active" data-gjs-type="carousel">
                             <img src="${slideImgOne}" alt="..." />
                             <div class="carousel-caption"> 
                                Slide 1
                             </div>
                         </div>
-                        <div class="item">
+                        <div class="item carousel-item" data-gjs-type="carousel">
                             <img src="${slideImgTwo}" alt="..." />
                             <div class="carousel-caption">
                                 Slide 2
                             </div>
                         </div>
-                        <div class="item">
+                        <div class="item carousel-item" data-gjs-type="carousel">
                             <img src="${slideImgThree}" alt="..." />
                             <div class="carousel-caption">
                                 Slide 3
