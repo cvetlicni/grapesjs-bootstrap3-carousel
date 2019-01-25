@@ -28,7 +28,6 @@ export const
                         .${name} .carousel-inner > .item > a > img {
                           display: block;
                           max-width: 100%;
-                          height: 100%;
                         }
                         .${name} .sr-only {
                           position: absolute;

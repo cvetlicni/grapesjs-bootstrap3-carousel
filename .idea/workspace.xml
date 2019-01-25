@@ -6,8 +6,7 @@
       <change beforePath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/carousel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/slide.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slide.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/consts.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -97,8 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/slide.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="92" column="61" lean-forward="true" selection-start-line="92" selection-start-column="61" selection-end-line="92" selection-end-column="61" />
+            <state relative-caret-position="568">
+              <caret line="104" column="45" lean-forward="true" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -107,7 +106,7 @@
         <entry file="file://$PROJECT_DIR$/src/consts.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="274">
-              <caret line="140" column="26" selection-start-line="140" selection-start-column="26" selection-end-line="140" selection-end-column="26" />
+              <caret line="139" column="26" selection-start-line="139" selection-start-column="26" selection-end-line="139" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -116,7 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>debugger;</find>
       <find>new slide</find>
       <find>carouselslides</find>
       <find>config</find>
@@ -146,6 +144,7 @@
       <find>carousel-inner</find>
       <find>item&quot;</find>
       <find>carousel-item</find>
+      <find>height: 100%</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -161,9 +160,9 @@
         <option value="$PROJECT_DIR$/src/components/control.js" />
         <option value="$PROJECT_DIR$/src/blocks.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/src/consts.js" />
         <option value="$PROJECT_DIR$/src/components/carousel.js" />
         <option value="$PROJECT_DIR$/src/components/slide.js" />
+        <option value="$PROJECT_DIR$/src/consts.js" />
       </list>
     </option>
   </component>
@@ -244,12 +243,12 @@
       <updated>1548167834685</updated>
       <workItem from="1548167836936" duration="20061000" />
       <workItem from="1548289714809" duration="13193000" />
-      <workItem from="1548367128282" duration="4849000" />
+      <workItem from="1548367128282" duration="4983000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38103000" />
+    <option name="totallyTimeSpent" value="38237000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
@@ -300,7 +299,7 @@
     <entry file="file://$PROJECT_DIR$/src/consts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
-          <caret line="140" column="26" selection-start-line="140" selection-start-column="26" selection-end-line="140" selection-end-column="26" />
+          <caret line="139" column="26" selection-start-line="139" selection-start-column="26" selection-end-line="139" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -365,8 +364,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/slide.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="92" column="61" lean-forward="true" selection-start-line="92" selection-start-column="61" selection-end-line="92" selection-end-column="61" />
+        <state relative-caret-position="568">
+          <caret line="104" column="45" lean-forward="true" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
         </state>
       </provider>
     </entry>
