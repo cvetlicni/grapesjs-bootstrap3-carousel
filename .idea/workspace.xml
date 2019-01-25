@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="09bfede4-6033-44d4-9698-c6690e8d77e5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/carousel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/indictor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/indictor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/slide.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slide.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/consts.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,11 +24,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/carousel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="467" column="81" selection-start-line="467" selection-start-column="81" selection-end-line="467" selection-end-column="81" />
+            <state relative-caret-position="552">
+              <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
               <folding>
-                <element signature="e#0#158#0" expanded="true" />
                 <element signature="n#style#0;n#svg#0;n#a#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#svg#0;n#a#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -36,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/control.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="49">
-              <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+            <state relative-caret-position="437">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -162,6 +163,7 @@
         <option value="$PROJECT_DIR$/src/consts.js" />
         <option value="$PROJECT_DIR$/src/components/slide.js" />
         <option value="$PROJECT_DIR$/src/components/indictor.js" />
+        <option value="$PROJECT_DIR$/src/components/caption.js" />
         <option value="$PROJECT_DIR$/src/components/carousel.js" />
       </list>
     </option>
@@ -243,15 +245,15 @@
       <updated>1548167834685</updated>
       <workItem from="1548167836936" duration="20061000" />
       <workItem from="1548289714809" duration="13193000" />
-      <workItem from="1548367128282" duration="6281000" />
+      <workItem from="1548367128282" duration="8513000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39535000" />
+    <option name="totallyTimeSpent" value="41767000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23930079" />
@@ -337,13 +339,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/control.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/slide.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
@@ -358,13 +353,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/control.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/caption.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/carousel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="467" column="81" selection-start-line="467" selection-start-column="81" selection-end-line="467" selection-end-column="81" />
+        <state relative-caret-position="552">
+          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
           <folding>
-            <element signature="e#0#158#0" expanded="true" />
             <element signature="n#style#0;n#svg#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#svg#0;n#a#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

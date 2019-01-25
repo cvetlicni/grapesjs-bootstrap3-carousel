@@ -1,12 +1,5 @@
-import {
-    compIndicatorName,
-    compSlideName,
-    compCarouselName,
-    slideImgOne,
-    slideImgTwo,
-    slideImgThree,
-    styleGen
-} from '../consts';
+import {compCarouselName, slideImgOne, slideImgThree, slideImgTwo, styleGen} from '../consts';
+
 export default (editor, config = {}) => {
     const style = styleGen(config.prefixName);
 
@@ -37,31 +30,31 @@ export default (editor, config = {}) => {
             moveTo: null, // To move left or right
 
             traits: [{
-                    label: 'Auto play',
-                    name: 'autoplay',
-                    changeProp: 1,
-                    type: 'checkbox'
-                }, {
-                    label: 'Interval',
-                    name: 'interval',
-                    changeProp: 1,
-                    type: 'number'
-                }, {
-                    label: '# Slides',
-                    name: 'slides',
-                    changeProp: 1,
-                    type: 'number'
-                }, {
-                    label: 'Captions',
-                    name: 'showCaptions',
-                    changeProp: 1,
-                    type: 'checkbox'
-                }, {
-                    label: 'Indicators',
-                    name: 'showIndicator',
-                    changeProp: 1,
-                    type: 'checkbox'
-                }],
+                label: 'Auto play',
+                name: 'autoplay',
+                changeProp: 1,
+                type: 'checkbox'
+            }, {
+                label: 'Interval',
+                name: 'interval',
+                changeProp: 1,
+                type: 'number'
+            }, {
+                label: '# Slides',
+                name: 'slides',
+                changeProp: 1,
+                type: 'number'
+            }, {
+                label: 'Captions',
+                name: 'showCaptions',
+                changeProp: 1,
+                type: 'checkbox'
+            }, {
+                label: 'Indicators',
+                name: 'showIndicator',
+                changeProp: 1,
+                type: 'checkbox'
+            }],
             script: function () {
                 // Set the ID
                 var id = this.id;
@@ -100,8 +93,8 @@ export default (editor, config = {}) => {
                                 this.options.keyboard && this.$element.on('keydown.bs.carousel', $.proxy(this.keydown, this))
 
                                 this.options.pause == 'hover' && !('ontouchstart' in document.documentElement) && this.$element
-                                        .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
-                                        .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
+                                    .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
+                                    .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
                             }
 
                             Carousel.VERSION = '3.3.7'
@@ -140,8 +133,8 @@ export default (editor, config = {}) => {
                                 this.options.interval = interval || this.options.interval;
 
                                 this.options.interval
-                                        && !this.paused
-                                        && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
+                                && !this.paused
+                                && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
 
                                 return this
                             }
@@ -154,7 +147,7 @@ export default (editor, config = {}) => {
                             Carousel.prototype.getItemForDirection = function (direction, active) {
                                 var activeIndex = this.getItemIndex(active)
                                 var willWrap = (direction == 'prev' && activeIndex === 0)
-                                        || (direction == 'next' && activeIndex == (this.$items.length - 1))
+                                    || (direction == 'next' && activeIndex == (this.$items.length - 1))
                                 if (willWrap && !this.options.wrap)
                                     return active
                                 var delta = direction == 'prev' ? -1 : 1
@@ -237,22 +230,25 @@ export default (editor, config = {}) => {
                                     $nextIndicator && $nextIndicator.addClass('active')
                                 }
 
-                                var slidEvent = $.Event('slid.bs.carousel', {relatedTarget: relatedTarget, direction: direction}) // yes, "slid"
+                                var slidEvent = $.Event('slid.bs.carousel', {
+                                    relatedTarget: relatedTarget,
+                                    direction: direction
+                                }) // yes, "slid"
                                 if ($.support.transition && this.$element.hasClass('slide')) {
                                     $next.addClass(type)
                                     $next[0].offsetWidth // force reflow
                                     $active.addClass(direction)
                                     $next.addClass(direction)
                                     $active
-                                            .one('bsTransitionEnd', function () {
-                                                $next.removeClass([type, direction].join(' ')).addClass('active')
-                                                $active.removeClass(['active', direction].join(' '))
-                                                that.sliding = false
-                                                setTimeout(function () {
-                                                    that.$element.trigger(slidEvent)
-                                                }, 0)
-                                            })
-                                            .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
+                                        .one('bsTransitionEnd', function () {
+                                            $next.removeClass([type, direction].join(' ')).addClass('active')
+                                            $active.removeClass(['active', direction].join(' '))
+                                            that.sliding = false
+                                            setTimeout(function () {
+                                                that.$element.trigger(slidEvent)
+                                            }, 0)
+                                        })
+                                        .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
                                 } else {
                                     $active.removeClass('active')
                                     $next.addClass('active')
@@ -327,8 +323,8 @@ export default (editor, config = {}) => {
                             }
 
                             $(document)
-                                    .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
-                                    .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
+                                .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
+                                .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
 
                             $(window).on('load', function () {
                                 $('[data-ride="carousel"]').each(function () {
