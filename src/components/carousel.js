@@ -456,28 +456,28 @@ export default (editor, config = {}) => {
                     `
                     <!-- Indicators -->
                     <ol class="carousel-indicators" data-type="${config.prefixName}-indicators">
-                        <li data-target="#" data-slide-to="0" class="active"></li>
-                        <li data-target="#" data-slide-to="1"></li>
-                        <li data-target="#" data-slide-to="2"></li>
+                        <li data-target="#" data-slide-to="0" class="active" data-gjs-type="indicator"></li>
+                        <li data-target="#" data-slide-to="1" data-gjs-type="indicator"></li>
+                        <li data-target="#" data-slide-to="2" data-gjs-type="indicator"></li>
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
-                        <div class="item carousel-item active" data-gjs-type="carousel">
+                        <div class="item carousel-item active" data-gjs-type="slide">
                             <img src="${slideImgOne}" alt="..." />
-                            <div class="carousel-caption"> 
+                            <div class="carousel-caption" data-gjs-type="caption"> 
                                Slide 1
                             </div>
                         </div>
-                        <div class="item carousel-item" data-gjs-type="carousel">
+                        <div class="item carousel-item" data-gjs-type="slide">
                             <img src="${slideImgTwo}" alt="..." />
-                            <div class="carousel-caption">
+                            <div class="carousel-caption" data-gjs-type="caption">
                                 Slide 2
                             </div>
                         </div>
-                        <div class="item carousel-item" data-gjs-type="carousel">
+                        <div class="item carousel-item" data-gjs-type="slide">
                             <img src="${slideImgThree}" alt="..." />
-                            <div class="carousel-caption">
+                            <div class="carousel-caption" data-gjs-type="caption">
                                 Slide 3
                             </div>
                         </div>

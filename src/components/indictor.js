@@ -52,7 +52,7 @@ export default (editor, config = {}) => {
 
             [...Array(n).keys()].forEach((i) => {
                 let _c = i === 0 ? 'active': '';
-                output += `<li data-target="#${id}" data-slide-to="${i}" class="${_c}"></li>`;
+                output += `<li data-target="#${id}" data-slide-to="${i}" class="${_c}" data-gjs-type="indicator"></li>`;
             });
 
             comps.reset();

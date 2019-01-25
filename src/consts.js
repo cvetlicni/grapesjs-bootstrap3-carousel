@@ -73,7 +73,7 @@ export const
                           display: block;
                           margin: auto;
                         }
-                         .caption-none > .item > .carousel-caption {
+                         .${name}.caption-none > .item > .carousel-caption {
                             display: none;
                         }
                         @media all and (transform-3d), (-webkit-transform-3d) {
