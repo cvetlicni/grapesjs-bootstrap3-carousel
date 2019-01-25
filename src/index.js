@@ -19,8 +19,6 @@ export default grapesjs.plugins.add('grapesjs-bootstrap3-carousel-plugin', (edit
 
                 showIndicator: true,
 
-                flexVertical: false,
-
                 hasGradient: false,
 
                 showCaptions: true,

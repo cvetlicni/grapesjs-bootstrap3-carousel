@@ -26,7 +26,6 @@ export default (editor, config = {}) => {
             autoplay: config.autoplay,
             showCaptions: config.showCaptions,
             showIndicator: config.showIndicator,
-            flexVertical: config.flexVertical,
             hasGradient: config.hasGradient,
 
             moveTo: null, // To move left or right
@@ -54,11 +53,6 @@ export default (editor, config = {}) => {
             }, {
                 label: 'Indicators',
                 name: 'showIndicator',
-                changeProp: 1,
-                type: 'checkbox'
-            }, {
-                label: 'V-align flexbox',
-                name: 'flexVertical',
                 changeProp: 1,
                 type: 'checkbox'
             }, {
@@ -455,7 +449,6 @@ export default (editor, config = {}) => {
 
         init() {
             this.listenTo(this.model, 'change:interval change:autoplay change:moveTo', this.updateScript);
-            this.listenTo(this.model, 'change:flexVertical', this.handleVerticalAlign);
             this.listenTo(this.model, 'change:hasGradient', this.handleGradient);
 
             const comps = this.model.components();
@@ -507,14 +500,6 @@ export default (editor, config = {}) => {
                     ${style}
                     `
                 );
-            }
-        },
-
-        handleVerticalAlign() {
-            if (this.model.get('flexVertical')) {
-                this.model.removeClass('flex-vertical');
-            } else {
-                this.model.addClass('flex-vertical');
             }
         },
 

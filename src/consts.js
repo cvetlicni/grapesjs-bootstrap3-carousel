@@ -23,11 +23,6 @@ export const
                         .${name} img {
                           vertical-align: middle;
                         }
-                        .${name}.flex-vertical .item {
-                          display: flex;
-                          flex-direction: column;
-                          justify-content: center;
-                        }
                         .${name} .img-responsive,
                         .${name} .carousel-inner > .item > img,
                         .${name} .carousel-inner > .item > a > img {
@@ -179,7 +174,7 @@ export const
                           background-repeat: repeat-x;
                           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
                         }
-                        .${name}.no-gradient-control .carousel-control.left, .${name} .carousel-control.right {
+                        .${name}.no-gradient-control .carousel-control.left, .${name}.no-gradient-control .carousel-control.right {
                           background: none;
                         }
                         .${name} .carousel-control:hover,
