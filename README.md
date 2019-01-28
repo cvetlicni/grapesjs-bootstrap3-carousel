@@ -8,6 +8,8 @@
 |`gridsCategory`|Grids category name|`Extra`|
 |`autoplay`|If the carousel begin moving|`true`|
 |`interval`|Interval to move the slides in ms|`5000`|
+|`showCaptions`|Should show captions|`true`|
+|`showIndicator`|Should show indicator|`true`|
 
 
 ## Usage

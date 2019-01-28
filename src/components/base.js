@@ -25,7 +25,7 @@ export default (editor, config = {}) => {
             shouldRefresh: true,
             showCaptions: true,
             showIndicator: true,
-            hasGradient: false,
+            hasGradient: true,
         },
 
     }, {

@@ -62,6 +62,9 @@ export default (editor, config = {}) => {
                 type: 'checkbox'
             }],
             script: function () {
+                var interval = this.getAttribute('data-interval') || '5000';
+                var autoplay = this.getAttribute('data-autoplay') || 'true';
+                var moveTo = this.getAttribute('data-moveto') || '';
                 // Set the ID
                 var id = this.id;
 
@@ -108,7 +111,7 @@ export default (editor, config = {}) => {
                             Carousel.TRANSITION_DURATION = 600
 
                             Carousel.DEFAULTS = {
-                                interval: '{[ interval ]}',
+                                interval: interval,
                                 pause: 'hover',
                                 wrap: true,
                                 keyboard: false
@@ -400,16 +403,15 @@ export default (editor, config = {}) => {
                     }
 
                     jQuery(`#${id}`).carousel({keyboard: false});
-                    jQuery(`#${id}`).carousel(parseInt('{[ interval ]}'));
+                    jQuery(`#${id}`).carousel(parseInt(interval));
                     jQuery(`#${id}`).carousel('pause');
 
-                    let autoPlay = Boolean('{[ autoplay ]}');
+                    let autoPlay = Boolean(autoplay);
                     if (true === autoPlay) {
                         // The carousel is moving by default.
                         jQuery(`#${id}`).carousel('cycle');
                     }
 
-                    let moveTo = '{[ moveTo ]}';
                     moveTo && jQuery(`#${id}`).carousel(moveTo);
                 };
 
@@ -448,8 +450,28 @@ export default (editor, config = {}) => {
         },
 
         init() {
-            this.listenTo(this.model, 'change:interval change:autoplay change:moveTo', this.updateScript);
+            this.listenTo(this.model, 'change:autoplay change:moveTo change:interval', () => {
+                this.model.setAttributes({
+                    ...this.model.getAttributes(),
+                    'data-interval': this.model.get('interval'),
+                    'data-autoplay': this.model.get('autoplay'),
+                    'data-moveto': this.model.get('moveTo')
+                });
+                this.updateScript();
+
+                setTimeout(() => {
+                    this.model.set('moveTo', null);
+                    this.updateScript();
+                    }, 600);
+            });
             this.listenTo(this.model, 'change:hasGradient', this.handleGradient);
+
+            this.model.setAttributes({
+                'data-interval': this.model.get('interval'),
+                'data-autoplay': this.model.get('autoplay'),
+                'data-moveto': this.model.get('moveTo'),
+                ...this.model.getAttributes()
+            });
 
             const comps = this.model.components();
 
@@ -524,13 +546,11 @@ export default (editor, config = {}) => {
             if (_class.includes('carousel-control') && _class.includes('left')) {
                 // Move left
                 this.model.set('moveTo', 'prev');
-                this.model.set('moveTo', null);
             }
 
             if (_class.includes('carousel-control') && _class.includes('right')) {
                 // Move right
                 this.model.set('moveTo', 'next');
-                this.model.set('moveTo', null);
             }
         },
 
