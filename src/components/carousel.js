@@ -187,8 +187,7 @@ export default (editor, config = {}) => {
                                     }) // yes, "slid"
                                 if (activeIndex == pos)
                                     return this.pause().cycle()
-
-                                return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos), this.$element.find('.captions-container').eq(pos))
+                                return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos), this.$element.find('.captions-container').children().eq(pos))
                             }
 
                             Carousel.prototype.pause = function (e) {

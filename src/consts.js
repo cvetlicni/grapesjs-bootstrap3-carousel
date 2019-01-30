@@ -57,6 +57,7 @@ export const
                           overflow: hidden;
                           width: 100%;
                           min-height: 200px;
+                          position: relative;
                         }
                         .${name} .captions-container > .ch-carousel-caption {
                           display: none;
@@ -89,6 +90,24 @@ export const
                          .${name}.caption-none > .item > .ch-carousel-caption,
                          .${name}.caption-none > .captions-container > .ch-carousel-caption {
                             display: none;
+                        }
+                        .${name} > .captions-container > .ch-carousel-caption.prev.right,
+                        .${name} > .captions-container > .ch-carousel-caption.next.left {
+                            animation: fadeIn 600ms forwards;
+                        }
+                        .${name} > .captions-container > .ch-carousel-caption.active.left,
+                        .${name} > .captions-container > .ch-carousel-caption.active.right {
+                            animation: fadeOut 600ms forwards;
+                        }
+                        @keyframes fadeIn {
+                          0%   {opacity: 0;}
+                          50%  {opacity: 0;}
+                          100% {opacity: 100%;}
+                        }
+                        @keyframes fadeOut {
+                          0%   {opacity: 100%;}
+                          50%  {opacity: 0;}
+                          100% {opacity: 0;}
                         }
                         @media all and (transform-3d), (-webkit-transform-3d) {
                           .${name} .captions-container > .ch-carousel-caption,
