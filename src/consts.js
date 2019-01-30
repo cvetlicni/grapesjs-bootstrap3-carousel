@@ -86,8 +86,8 @@ export const
                           display: block;
                           margin: auto;
                         }
-                         .${name} .caption-none > .item > .ch-carousel-caption,
-                         .${name} .caption-none > .ch-carousel-caption {
+                         .${name}.caption-none > .item > .ch-carousel-caption,
+                         .${name}.caption-none > .captions-container > .ch-carousel-caption {
                             display: none;
                         }
                         @media all and (transform-3d), (-webkit-transform-3d) {

@@ -35,9 +35,9 @@ export default (editor, config = {}) => {
 
         toggleCaptions() {
             if (this.model.parent().get('showCaptions')) {
-                this.model.removeClass('caption-none');
+                this.model.parent().removeClass('caption-none');
             } else {
-                this.model.addClass('caption-none');
+                this.model.parent().addClass('caption-none');
             }
         },
 
