@@ -85,17 +85,16 @@ export default (editor, config = {}) => {
         reduce(comps, n) {
             [...Array(n).keys()].forEach((i) => {
                 comps.pop();
+                comps.parent.parent().components().models[3].components().pop();
             });
         },
 
         increse(comps, n) {
             [...Array(n).keys()].forEach((i) => {
-                let output = `<div class="item carousel-item" data-gjs-type="slide">
-                            <div class="ch-carousel-caption" data-gjs-type="text">
-                                New Slide
-                            </div>
-                        </div>`;
+                let output = `<div class="item carousel-item" data-gjs-type="slide"></div>`;
+                let outputCaption = `<div class="ch-carousel-caption" data-gjs-type="text">New Slide</div>`;
                 comps.add(output);
+                comps.parent.parent().components().models[3].components().add(outputCaption);
             });
         },
 

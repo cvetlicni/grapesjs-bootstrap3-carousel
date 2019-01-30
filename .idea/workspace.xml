@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09bfede4-6033-44d4-9698-c6690e8d77e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/base.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/carousel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/control.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/control.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/slide.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slide.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/consts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -27,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/carousel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="533" selection-start-line="533" selection-end-line="533" />
+            <state relative-caret-position="299">
+              <caret line="547" selection-start-line="547" selection-end-line="547" />
             </state>
           </provider>
         </entry>
@@ -45,7 +41,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/indictor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
+            <state relative-caret-position="-313">
               <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
             </state>
           </provider>
@@ -66,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/consts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="144" column="41" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="41" />
+            <state relative-caret-position="23">
+              <caret line="53" column="44" lean-forward="true" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -75,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/slide.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1953">
-              <caret line="93" selection-start-line="93" selection-end-line="93" />
+            <state relative-caret-position="253">
+              <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -85,36 +81,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mouse</find>
-      <find>:update</find>
-      <find>.item</find>
-      <find>.carousel-caption</find>
-      <find>overflow</find>
-      <find>Plugin</find>
-      <find>svg</find>
-      <find>right</find>
-      <find>.carousel-control</find>
-      <find>hasGradient</find>
-      <find>100px</find>
-      <find>&lt;img</find>
-      <find>20%</find>
-      <find>getItemIndex</find>
-      <find>index</find>
-      <find>debugger</find>
-      <find>data-autopla</find>
-      <find>text-sha</find>
-      <find>text-shadow</find>
-      <find>innerText</find>
-      <find>gradient</find>
-      <find>right</find>
-      <find>carousel-inner</find>
-      <find>item</find>
-      <find>carousel-control</find>
       <find>carousel-caption</find>
       <find>filter</find>
       <find>.ch-carousel-in</find>
-      <find>style</find>
       <find>50%</find>
+      <find>style</find>
+      <find>clearfix</find>
+      <find>this.$items.parent().parent().children()[0]</find>
+      <find>carousel-page-counter</find>
+      <find>columns</find>
+      <find>data-slide</find>
+      <find>carousel-item</find>
+      <find>autoplay</find>
+      <find>carousel-inner</find>
+      <find>item</find>
+      <find>$items</find>
+      <find>getitemIndex</find>
+      <find>next</find>
+      <find>getItemForD</find>
+      <find>.slide</find>
+      <find>slide(</find>
+      <find>.slide(</find>
+      <find>left</find>
+      <find>.left</find>
+      <find>ch-carousel-caption</find>
+      <find>.item</find>
+      <find>.next.left</find>
+      <find>top: 0</find>
+      <find>600</find>
+      <find>captions-container</find>
+      <find>Carousel.prototype.sli</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -136,8 +132,8 @@
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/components/indictor.js" />
         <option value="$PROJECT_DIR$/src/components/control.js" />
-        <option value="$PROJECT_DIR$/src/components/slide.js" />
         <option value="$PROJECT_DIR$/src/consts.js" />
+        <option value="$PROJECT_DIR$/src/components/slide.js" />
         <option value="$PROJECT_DIR$/src/components/carousel.js" />
       </list>
     </option>
@@ -215,12 +211,12 @@
       <workItem from="1548289714809" duration="13193000" />
       <workItem from="1548367128282" duration="10423000" />
       <workItem from="1548446258984" duration="3542000" />
-      <workItem from="1548666334714" duration="29175000" />
+      <workItem from="1548666334714" duration="38161000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76394000" />
+    <option name="totallyTimeSpent" value="85380000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
@@ -313,13 +309,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/slide.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1953">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -339,8 +328,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/consts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="144" column="41" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="41" />
+        <state relative-caret-position="23">
+          <caret line="53" column="44" lean-forward="true" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/slide.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -356,7 +352,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/indictor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
+        <state relative-caret-position="-313">
           <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
         </state>
       </provider>
@@ -370,8 +366,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/carousel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="533" selection-start-line="533" selection-end-line="533" />
+        <state relative-caret-position="299">
+          <caret line="547" selection-start-line="547" selection-end-line="547" />
         </state>
       </provider>
     </entry>

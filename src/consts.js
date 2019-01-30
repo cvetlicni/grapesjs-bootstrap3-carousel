@@ -55,10 +55,20 @@ export const
                         }
                         .${name} .ch-carousel-inner {
                           overflow: hidden;
-                          padding-bottom: 60px;
-                          position: absolute;
                           width: 100%;
                           min-height: 200px;
+                        }
+                        .${name} .captions-container > .ch-carousel-caption {
+                          display: none;
+                          -webkit-transition: 0.6s ease-in-out left;
+                          -o-transition: 0.6s ease-in-out left;
+                          transition: 0.6s ease-in-out left;
+                          position: absolute;
+                        left: 0;
+                        right: 0;
+                        margin-left: auto;
+                        margin-right: auto;
+                        width: 80%;
                         }
                         .${name} .ch-carousel-inner > .item {
                           display: none;
@@ -76,10 +86,12 @@ export const
                           display: block;
                           margin: auto;
                         }
-                         .${name} .caption-none > .item > .ch-carousel-caption {
+                         .${name} .caption-none > .item > .ch-carousel-caption,
+                         .${name} .caption-none > .ch-carousel-caption {
                             display: none;
                         }
                         @media all and (transform-3d), (-webkit-transform-3d) {
+                          .${name} .captions-container > .ch-carousel-caption,
                           .${name} .ch-carousel-inner > .item {
                             -webkit-transition: -webkit-transform 0.6s ease-in-out;
                             -o-transition: -o-transform 0.6s ease-in-out;
@@ -89,18 +101,25 @@ export const
                             -webkit-perspective: 1000px;
                             perspective: 1000px;
                           }
+                          .${name} .captions-container > .ch-carousel-caption.next,
+                          .${name} .captions-container > .ch-carousel-caption.active.right,
                           .${name} .ch-carousel-inner > .item.next,
                           .${name} .ch-carousel-inner > .item.active.right {
                             -webkit-transform: translate3d(100%, 0, 0);
                             transform: translate3d(100%, 0, 0);
                             left: 0;
                           }
+                          .${name} .captions-container > .ch-carousel-caption.prev,
+                          .${name} .captions-container > .ch-carousel-caption.active.left,
                           .${name} .ch-carousel-inner > .item.prev,
                           .${name} .ch-carousel-inner > .item.active.left {
                             -webkit-transform: translate3d(-100%, 0, 0);
                             transform: translate3d(-100%, 0, 0);
                             left: 0;
                           }
+                          .${name} .captions-container > .ch-carousel-caption.next.left,
+                          .${name} .captions-container > .ch-carousel-caption.prev.right,
+                          .${name} .captions-container > .ch-carousel-caption.active,
                           .${name} .ch-carousel-inner > .item.next.left,
                           .${name} .ch-carousel-inner > .item.prev.right,
                           .${name} .ch-carousel-inner > .item.active {
@@ -109,11 +128,15 @@ export const
                             left: 0;
                           }
                         }
+                        .${name} .captions-container > .prev,
+                        .${name} .captions-container > .next,
+                        .${name} .captions-container > .active,
                         .${name} .ch-carousel-inner > .active,
                         .${name} .ch-carousel-inner > .next,
                         .${name} .ch-carousel-inner > .prev {
                           display: block;
                         }
+                        .${name} .captions-container > .active,
                         .${name} .ch-carousel-inner > .active {
                           left: 0;
                         }
@@ -123,19 +146,25 @@ export const
                           top: 0;
                           width: 100%;
                         }
+                        .${name} .captions-container > .next,
                         .${name} .ch-carousel-inner > .next {
                           left: 100%;
                         }
+                        .${name} .captions-container > .prev,
                         .${name} .ch-carousel-inner > .prev {
                           left: -100%;
                         }
+                        .${name} .captions-container > .next.left,
+                        .${name} .captions-container > .prev.right,
                         .${name} .ch-carousel-inner > .next.left,
                         .${name} .ch-carousel-inner > .prev.right {
                           left: 0;
                         }
+                        .${name} .captions-container > .active.left,
                         .${name} .ch-carousel-inner > .active.left {
                           left: -100%;
                         }
+                        .${name} .captions-container > .active.right,
                         .${name} .ch-carousel-inner > .active.right {
                           left: 100%;
                         }
@@ -246,7 +275,7 @@ export const
                         .${name} .ch-carousel-caption .btn {
                           text-shadow: none;
                         }
-                        .${name} #carousel-page-counter {
+                        .${name} .carousel-page-counter {
                             display: none;
                         }
                         @media screen and (min-width: 768px) {
@@ -290,7 +319,7 @@ export const
                           margin-right: auto;
                         }
                         @media screen and (max-width: 768px) {
-                            .${name} #carousel-page-counter {
+                            .${name} .carousel-page-counter {
                                 display: block;
                                 position: absolute;
                                 left: 50%;

@@ -1,11 +1,11 @@
 import {compCarouselName, slideImgOne, slideImgThree, slideImgTwo, styleGen} from '../consts';
 
 export default (editor, config = {}) => {
-    // const style = styleGen(config.prefixName);
-    // let shortStyle = JSON.stringify(style);
-    // shortStyle = shortStyle.replace(/\\n/g, '');
-    // shortStyle = shortStyle.replace(/ /g, '');
-    // console.log(shortStyle);
+    const style = styleGen(config.prefixName);
+    let shortStyle = JSON.stringify(style);
+    shortStyle = shortStyle.replace(/\\n/g, '');
+    shortStyle = shortStyle.replace(/  /g, '');
+    console.log(shortStyle);
 
     const domc = editor.DomComponents;
     const defaultType = domc.getType('default');
@@ -19,7 +19,6 @@ export default (editor, config = {}) => {
             interval: config.interval,
             droppable: false,
 
-            //  <div class="${config.prefixName} carousel slide" data-ride="carousel" data-type="${config.prefixName}">
             attributes: {
                 class: `${config.prefixName} carousel slide`,
                 'data-ride': 'carousel',
@@ -67,7 +66,7 @@ export default (editor, config = {}) => {
             }*/],
             script: function () {
                 var interval = this.getAttribute('data-interval') || '5000';
-                var autoplay = this.getAttribute('data-autoplay') || 'false';
+                var autoplay = this.getAttribute('data-autoplay') || false;
                 var moveTo = this.getAttribute('data-moveto') || '';
                 // Set the ID
                 var id = this.id;
@@ -155,7 +154,7 @@ export default (editor, config = {}) => {
                             Carousel.prototype.getItemIndex = function (item) {
                                 this.$items = item.parent().children('.item')
                                 let activeIndex = this.$items.index(item || this.$active)
-                                let counter = document.getElementById("carousel-page-counter");
+                                let counter = this.$items.parent().parent().children()[0]
                                 if (counter && counter.innerText) counter.innerText = `${activeIndex + 1} of ${this.$items.length}`
                                 return activeIndex;
                             }
@@ -168,7 +167,7 @@ export default (editor, config = {}) => {
                                     return active
                                 var delta = direction == 'prev' ? -1 : 1
                                 var itemIndex = (activeIndex + delta) % this.$items.length
-                                return this.$items.eq(itemIndex)
+                                return itemIndex;
                             }
 
                             Carousel.prototype.setInterval = function (i) {
@@ -189,7 +188,7 @@ export default (editor, config = {}) => {
                                 if (activeIndex == pos)
                                     return this.pause().cycle()
 
-                                return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos))
+                                return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos), this.$element.find('.captions-container').eq(pos))
                             }
 
                             Carousel.prototype.pause = function (e) {
@@ -217,9 +216,16 @@ export default (editor, config = {}) => {
                                 return this.slide('prev')
                             }
 
-                            Carousel.prototype.slide = function (type, next) {
+                            Carousel.prototype.slide = function (type, next, nextCaption) {
                                 var $active = this.$element.find('.item.active')
-                                var $next = next || this.getItemForDirection(type, $active)
+                                var nextIndex = this.getItemForDirection(type, $active)
+                                var $next = next || this.$items.eq(nextIndex);
+
+                                var $captions = this.$element.find('.captions-container');
+                                var $activeCaption = this.$element.find('.ch-carousel-caption.active')
+                                var $nextCaption = nextCaption || $captions.children().eq(nextIndex);
+
+
                                 var isCycling = this.interval
                                 var direction = type == 'next' ? 'left' : 'right'
                                 var that = this
@@ -252,13 +258,18 @@ export default (editor, config = {}) => {
                                 }) // yes, "slid"
                                 if ($.support.transition && this.$element.hasClass('slide')) {
                                     $next.addClass(type)
+                                    $nextCaption.addClass(type)
                                     $next[0].offsetWidth // force reflow
                                     $active.addClass(direction)
+                                    $activeCaption.addClass(direction)
                                     $next.addClass(direction)
+                                    $nextCaption.addClass(direction)
                                     $active
                                         .one('bsTransitionEnd', function () {
                                             $next.removeClass([type, direction].join(' ')).addClass('active')
+                                            $nextCaption.removeClass([type, direction].join(' ')).addClass('active')
                                             $active.removeClass(['active', direction].join(' '))
+                                            $activeCaption.removeClass(['active', direction].join(' '))
                                             that.sliding = false
                                             setTimeout(function () {
                                                 that.$element.trigger(slidEvent)
@@ -267,7 +278,9 @@ export default (editor, config = {}) => {
                                         .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
                                 } else {
                                     $active.removeClass('active')
+                                    $activeCaption.removeClass('active')
                                     $next.addClass('active')
+                                    $nextCaption.addClass('active')
                                     this.sliding = false
                                     this.$element.trigger(slidEvent)
                                 }
@@ -456,10 +469,6 @@ export default (editor, config = {}) => {
             this.model.set('slides', parseInt(this.model.get('slides')) - 1)
         },
 
-        updatePagination() {
-
-        },
-
         updatePage() {
             this.model.setAttributes({
                 ...this.model.getAttributes(),
@@ -467,13 +476,12 @@ export default (editor, config = {}) => {
                 'data-autoplay': this.model.get('autoplay'),
                 'data-moveto': this.model.get('moveTo')
             });
-            this.updatePagination()
             this.updateScript();
 
             setTimeout(() => {
                 this.model.set('moveTo', null);
                 this.updateScript();
-            }, 600);
+            }, 610);
         },
 
         init() {
@@ -492,7 +500,7 @@ export default (editor, config = {}) => {
             if (!comps.length) {
                 comps.add(
                     `
-                    <div id="carousel-page-counter">1 of 3</div>
+                    <div class="carousel-page-counter">1 of 3</div>
 
                     <!-- Indicators -->
                     <ol class="carousel-indicators" data-type="${config.prefixName}-indicators">
@@ -504,19 +512,25 @@ export default (editor, config = {}) => {
                     <!-- Wrapper for slides -->
                     <div class="ch-carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
                         <div class="item carousel-item active" data-gjs-type="slide">
-                            <div class="ch-carousel-caption" data-gjs-type="text"> 
-                               Slide 1
-                            </div>
+                           
                         </div>
                         <div class="item carousel-item" data-gjs-type="slide">
-                            <div class="ch-carousel-caption" data-gjs-type="text">
-                                Slide 2
-                            </div>
+                           
                         </div>
                         <div class="item carousel-item" data-gjs-type="slide">
-                            <div class="ch-carousel-caption" data-gjs-type="text">
-                                Slide 3
-                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="captions-container">
+                        <div class="ch-carousel-caption active" data-gjs-type="text">
+                            Slide 1
+                        </div>
+                        <div class="ch-carousel-caption" data-gjs-type="text">
+                            Slide 2
+                        </div>
+                        <div class="ch-carousel-caption" data-gjs-type="text">
+                            Slide 3
                         </div>
                     </div>
 
@@ -531,6 +545,7 @@ export default (editor, config = {}) => {
                             <path d="M1.17188 0.3573C1.26562 0.26355 1.35938 0.216675 1.54688 0.216675C1.6875 0.216675 1.82812 0.26355 1.96875 0.3573L11.7656 10.201C11.8594 10.2948 11.9531 10.4354 11.9531 10.576C11.9531 10.7635 11.8594 10.8573 11.7656 10.951L1.96875 20.7948C1.82812 20.8885 1.6875 20.9354 1.54688 20.9354C1.35938 20.9354 1.26562 20.8885 1.17188 20.7948L0.234375 19.8573C0.09375 19.7635 0.046875 19.6698 0.046875 19.4823C0.046875 19.3417 0.09375 19.201 0.234375 19.0604L8.71875 10.576L0.234375 2.09167C0.09375 1.99792 0.046875 1.8573 0.046875 1.6698C0.046875 1.52917 0.09375 1.38855 0.234375 1.2948L1.17188 0.3573Z" fill="#6F6F6F"/>
                         </svg>
                     </a>
+                    ${style}
                     `
                 );
             }
