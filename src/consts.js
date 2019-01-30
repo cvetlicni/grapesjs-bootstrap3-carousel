@@ -6,7 +6,7 @@ export const
 
     // component's name
     compBaseName = 'carousel-base',
-    compIndicatorName = 'carousel-indicator',
+    compIndicatorName = ' carousel-indicator',
     compSlideName = 'carousel-slide',
     compControlName = 'carousel-control',
     compCarouselName = 'carousel',
@@ -24,8 +24,8 @@ export const
                           vertical-align: middle;
                         }
                         .${name} .img-responsive,
-                        .${name} .carousel-inner > .item > img,
-                        .${name} .carousel-inner > .item > a > img {
+                        .${name} .ch-carousel-inner > .item > img,
+                        .${name} .ch-carousel-inner > .item > a > img {
                           display: block;
                           max-width: 100%;
                           width: 100%;
@@ -51,34 +51,36 @@ export const
                         }
                         .${name}.carousel {
                           position: relative;
-                          min-height: 100px;
+                          min-height: 200px;
                         }
-                        .${name} .carousel-inner {
-                          position: relative;
+                        .${name} .ch-carousel-inner {
                           overflow: hidden;
+                          padding-bottom: 60px;
+                          position: absolute;
                           width: 100%;
-                          min-height: 100px;
+                          min-height: 200px;
                         }
-                        .${name} .carousel-inner > .item {
+                        .${name} .ch-carousel-inner > .item {
                           display: none;
                           position: relative;
                           -webkit-transition: 0.6s ease-in-out left;
                           -o-transition: 0.6s ease-in-out left;
                           transition: 0.6s ease-in-out left;
-                          min-height: 100px;
+                          min-height: 200px;
                           padding: 1px;
+                          background: #F5F5F5;
                         }
-                        .${name} .carousel-inner > .item > img,
-                        .${name} .carousel-inner > .item > a > img {
+                        .${name} .ch-carousel-inner > .item > img,
+                        .${name} .ch-carousel-inner > .item > a > img {
                           line-height: 1;
                           display: block;
                           margin: auto;
                         }
-                         .${name} .caption-none > .item > .carousel-caption {
+                         .${name} .caption-none > .item > .ch-carousel-caption {
                             display: none;
                         }
                         @media all and (transform-3d), (-webkit-transform-3d) {
-                          .${name} .carousel-inner > .item {
+                          .${name} .ch-carousel-inner > .item {
                             -webkit-transition: -webkit-transform 0.6s ease-in-out;
                             -o-transition: -o-transform 0.6s ease-in-out;
                             transition: transform 0.6s ease-in-out;
@@ -87,126 +89,117 @@ export const
                             -webkit-perspective: 1000px;
                             perspective: 1000px;
                           }
-                          .${name} .carousel-inner > .item.next,
-                          .${name} .carousel-inner > .item.active.right {
+                          .${name} .ch-carousel-inner > .item.next,
+                          .${name} .ch-carousel-inner > .item.active.right {
                             -webkit-transform: translate3d(100%, 0, 0);
                             transform: translate3d(100%, 0, 0);
                             left: 0;
                           }
-                          .${name} .carousel-inner > .item.prev,
-                          .${name} .carousel-inner > .item.active.left {
+                          .${name} .ch-carousel-inner > .item.prev,
+                          .${name} .ch-carousel-inner > .item.active.left {
                             -webkit-transform: translate3d(-100%, 0, 0);
                             transform: translate3d(-100%, 0, 0);
                             left: 0;
                           }
-                          .${name} .carousel-inner > .item.next.left,
-                          .${name} .carousel-inner > .item.prev.right,
-                          .${name} .carousel-inner > .item.active {
+                          .${name} .ch-carousel-inner > .item.next.left,
+                          .${name} .ch-carousel-inner > .item.prev.right,
+                          .${name} .ch-carousel-inner > .item.active {
                             -webkit-transform: translate3d(0, 0, 0);
                             transform: translate3d(0, 0, 0);
                             left: 0;
                           }
                         }
-                        .${name} .carousel-inner > .active,
-                        .${name} .carousel-inner > .next,
-                        .${name} .carousel-inner > .prev {
+                        .${name} .ch-carousel-inner > .active,
+                        .${name} .ch-carousel-inner > .next,
+                        .${name} .ch-carousel-inner > .prev {
                           display: block;
                         }
-                        .${name} .carousel-inner > .active {
+                        .${name} .ch-carousel-inner > .active {
                           left: 0;
                         }
-                        .${name} .carousel-inner > .next,
-                        .${name} .carousel-inner > .prev {
+                        .${name} .ch-carousel-inner > .next,
+                        .${name} .ch-carousel-inner > .prev {
                           position: absolute;
                           top: 0;
                           width: 100%;
                         }
-                        .${name} .carousel-inner > .next {
+                        .${name} .ch-carousel-inner > .next {
                           left: 100%;
                         }
-                        .${name} .carousel-inner > .prev {
+                        .${name} .ch-carousel-inner > .prev {
                           left: -100%;
                         }
-                        .${name} .carousel-inner > .next.left,
-                        .${name} .carousel-inner > .prev.right {
+                        .${name} .ch-carousel-inner > .next.left,
+                        .${name} .ch-carousel-inner > .prev.right {
                           left: 0;
                         }
-                        .${name} .carousel-inner > .active.left {
+                        .${name} .ch-carousel-inner > .active.left {
                           left: -100%;
                         }
-                        .${name} .carousel-inner > .active.right {
+                        .${name} .ch-carousel-inner > .active.right {
                           left: 100%;
                         }
-                        .${name} .carousel-control svg {
-                          background: rgba(255, 255, 255, .5);
-                          border-radius: 50%;
-                          box-shadow: 0 0 20px rgba(255, 255, 255, .5)
+                        .${name} .ch-carousel-control svg {
+                            position: absolute;
+                            z-index: 5;
+                            top: calc(50% - 11px);
                         }
-                        .${name} .carousel-control {
+                        .${name} .ch-carousel-control {
                           position: absolute;
                           top: 0;
                           left: 0;
                           bottom: 0;
-                          width: 15%;
+                          width: 5%;
                           opacity: 0.5;
                           filter: alpha(opacity=50);
                           font-size: 20px;
                           color: #ffffff;
                           text-align: center;
-                          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
                           background-color: rgba(0, 0, 0, 0);
                         }
-                        .${name} .carousel-control.left {
-                          background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-                          background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-                          background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.0001)));
-                          background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-                          background-repeat: repeat-x;
-                          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+                        .${name} .ch-carousel-control.left {
+                          left: 0;
                         }
-                        .${name} .carousel-control.right {
+                        .${name} .ch-carousel-control.right {
                           left: auto;
                           right: 0;
-                          background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-                          background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-                          background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.0001)), to(rgba(0, 0, 0, 0.5)));
-                          background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-                          background-repeat: repeat-x;
-                          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
                         }
-                        .${name}.no-gradient-control .carousel-control.left, .${name}.no-gradient-control .carousel-control.right {
-                          background: none;
+                        .${name} .ch-carousel-control.right svg {
+                          left: calc(50% - 6px);
                         }
-                        .${name} .carousel-control:hover,
-                        .${name} .carousel-control:focus {
+                        .${name} .ch-carousel-control.left svg {
+                          right: calc(50% - 6px);
+                        }
+                        .${name} .ch-carousel-control:hover,
+                        .${name} .ch-carousel-control:focus {
                           outline: 0;
                           color: #ffffff;
                           text-decoration: none;
                           opacity: 0.9;
                           filter: alpha(opacity=90);
                         }
-                        .${name} .carousel-control .icon-prev,
-                        .${name} .carousel-control .icon-next,
-                        .${name} .carousel-control .glyphicon-chevron-left,
-                        .${name} .carousel-control .glyphicon-chevron-right {
+                        .${name} .ch-carousel-control .icon-prev,
+                        .${name} .ch-carousel-control .icon-next,
+                        .${name} .ch-carousel-control .glyphicon-chevron-left,
+                        .${name} .ch-carousel-control .glyphicon-chevron-right {
                           position: absolute;
                           top: 50%;
                           margin-top: -10px;
                           z-index: 5;
                           display: inline-block;
                         }
-                        .${name} .carousel-control .icon-prev,
-                        .${name} .carousel-control .glyphicon-chevron-left {
+                        .${name} .ch-carousel-control .icon-prev,
+                        .${name} .ch-carousel-control .glyphicon-chevron-left {
                           left: 50%;
                           margin-left: -10px;
                         }
-                        .${name} .carousel-control .icon-next,
-                        .${name} .carousel-control .glyphicon-chevron-right {
+                        .${name} .ch-carousel-control .icon-next,
+                        .${name} .ch-carousel-control .glyphicon-chevron-right {
                           right: 50%;
                           margin-right: -10px;
                         }
-                        .${name} .carousel-control .icon-prev,
-                        .${name} .carousel-control .icon-next {
+                        .${name} .ch-carousel-control .icon-prev,
+                        .${name} .ch-carousel-control .icon-next {
                           width: 20px;
                           height: 20px;
                           line-height: 1;
@@ -214,7 +207,7 @@ export const
                         }
                         .${name} .carousel-indicators {
                           position: absolute;
-                          bottom: 10px;
+                          bottom: -40px !important;
                           left: 50%;
                           z-index: 15;
                           width: 60%;
@@ -225,56 +218,56 @@ export const
                         }
                         .${name} .carousel-indicators li {
                           display: inline-block;
-                          width: 10px;
-                          height: 10px;
-                          margin: 1px;
+                          width: 8px;
+                          height: 8px;
+                          margin: 1px 4px;
                           text-indent: -999px;
-                          border: 1px solid #ffffff;
                           border-radius: 10px;
                           cursor: pointer;
-                          background-color: #000;
-                          background-color: rgba(0, 0, 0, 0);
+                          background-color: #dadada;
                         }
                         .${name} .carousel-indicators .active {
-                          margin: 0;
-                          width: 12px;
-                          height: 12px;
-                          background-color: #ffffff;
+                          width: 8px;
+                          height: 8px;
+                          background-color: #6F6F6F;
                         }
-                        .${name} .carousel-caption {
+                        .${name} .ch-carousel-caption {
                           position: absolute;
                           left: 15%;
                           right: 15%;
-                          bottom: 20px;
                           z-index: 10;
                           padding-top: 20px;
                           padding-bottom: 20px;
-                          color: #ffffff;
                           text-align: center;
-                          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+                          font-size: 14px;
+                          bottom: -84px !important;
+                          color: #9B9B9B;
                         }
-                        .${name} .carousel-caption .btn {
+                        .${name} .ch-carousel-caption .btn {
                           text-shadow: none;
                         }
+                        .${name} #carousel-page-counter {
+                            display: none;
+                        }
                         @media screen and (min-width: 768px) {
-                          .${name} .carousel-control .glyphicon-chevron-left,
-                          .${name} .carousel-control .glyphicon-chevron-right,
-                          .${name} .carousel-control .icon-prev,
-                          .${name} .carousel-control .icon-next {
+                          .${name} .ch-carousel-control .glyphicon-chevron-left,
+                          .${name} .ch-carousel-control .glyphicon-chevron-right,
+                          .${name} .ch-carousel-control .icon-prev,
+                          .${name} .ch-carousel-control .icon-next {
                             width: 30px;
                             height: 30px;
                             margin-top: -10px;
                             font-size: 30px;
                           }
-                          .${name} .carousel-control .glyphicon-chevron-left,
-                          .${name} .carousel-control .icon-prev {
+                          .${name} .ch-carousel-control .glyphicon-chevron-left,
+                          .${name} .ch-carousel-control .icon-prev {
                             margin-left: -10px;
                           }
-                          .${name} .carousel-control .glyphicon-chevron-right,
-                          .${name} .carousel-control .icon-next {
+                          .${name} .ch-carousel-control .glyphicon-chevron-right,
+                          .${name} .ch-carousel-control .icon-next {
                             margin-right: -10px;
                           }
-                          .${name} .carousel-caption {
+                          .${name} .ch-carousel-caption {
                             left: 20%;
                             right: 20%;
                             padding-bottom: 30px;
@@ -295,6 +288,51 @@ export const
                           display: block;
                           margin-left: auto;
                           margin-right: auto;
+                        }
+                        @media screen and (max-width: 768px) {
+                            .${name} #carousel-page-counter {
+                                display: block;
+                                position: absolute;
+                                left: 50%;
+                                z-index: 15;
+                                width: 60%;
+                                margin-left: -30%;
+                                padding-left: 0px;
+                                list-style-type: none;
+                                list-style-position: initial;
+                                list-style-image: initial;
+                                text-align: center;
+                                bottom: -30px !important;
+                                color: #6F6F6F;
+                            }
+                            .${name} .ch-carousel-control.left {
+                              left: calc(50% - 50px);
+                              width: 30px;
+                              height: 30px;
+                              bottom: -35px;
+                              top: auto;
+                              text-align: left;
+                              z-index: 1500;
+                            }
+                            .${name} .ch-carousel-control.left svg {
+                              text-align: right;
+                              top: calc(50% - 11px);
+                            }
+                            .${name} .ch-carousel-control.right {
+                              right: calc(50% - 50px);
+                              width: 30px;
+                              height: 30px;
+                              bottom: -35px;
+                              top: auto;
+                              z-index: 1500;
+                            }
+                            .${name} .ch-carousel-control.right svg {
+                              text-align: right;
+                              top: calc(50% - 11px);
+                            }
+                            .${name} .carousel-indicators {
+                                display: none;
+                            }
                         }
                     </style>`;
     };

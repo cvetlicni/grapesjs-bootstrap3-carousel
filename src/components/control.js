@@ -17,7 +17,7 @@ export default (editor, config = {}) => {
     }, {
         isComponent(el) {
 
-            if (el.tagName === 'A' && el.className.includes('carousel-control')) {
+            if (el.tagName === 'A' && el.className.includes('ch-carousel-control')) {
                 return {type: TYPE};
             }
             return '';

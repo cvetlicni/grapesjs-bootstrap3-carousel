@@ -1,7 +1,11 @@
 import {compCarouselName, slideImgOne, slideImgThree, slideImgTwo, styleGen} from '../consts';
 
 export default (editor, config = {}) => {
-    const style = styleGen(config.prefixName);
+    // const style = styleGen(config.prefixName);
+    // let shortStyle = JSON.stringify(style);
+    // shortStyle = shortStyle.replace(/\\n/g, '');
+    // shortStyle = shortStyle.replace(/ /g, '');
+    // console.log(shortStyle);
 
     const domc = editor.DomComponents;
     const defaultType = domc.getType('default');
@@ -26,7 +30,7 @@ export default (editor, config = {}) => {
             autoplay: config.autoplay,
             showCaptions: config.showCaptions,
             showIndicator: config.showIndicator,
-            hasGradient: config.hasGradient,
+            // hasGradient: config.hasGradient,
 
             moveTo: null, // To move left or right
 
@@ -55,15 +59,15 @@ export default (editor, config = {}) => {
                 name: 'showIndicator',
                 changeProp: 1,
                 type: 'checkbox'
-            }, {
+            }/*, {
                 label: 'Gradient on controls',
                 name: 'hasGradient',
                 changeProp: 1,
                 type: 'checkbox'
-            }],
+            }*/],
             script: function () {
                 var interval = this.getAttribute('data-interval') || '5000';
-                var autoplay = this.getAttribute('data-autoplay') || 'true';
+                var autoplay = this.getAttribute('data-autoplay') || 'false';
                 var moveTo = this.getAttribute('data-moveto') || '';
                 // Set the ID
                 var id = this.id;
@@ -74,7 +78,7 @@ export default (editor, config = {}) => {
                     indicator.setAttribute('data-target', `#${id}`);
                 }
 
-                var controls = document.querySelectorAll(`#${id} .carousel-control`);
+                var controls = document.querySelectorAll(`#${id} .ch-carousel-control`);
                 for (var control of controls) {
                     control.setAttribute('href', `#${id}`);
                 }
@@ -150,7 +154,10 @@ export default (editor, config = {}) => {
 
                             Carousel.prototype.getItemIndex = function (item) {
                                 this.$items = item.parent().children('.item')
-                                return this.$items.index(item || this.$active)
+                                let activeIndex = this.$items.index(item || this.$active)
+                                let counter = document.getElementById("carousel-page-counter");
+                                if (counter && counter.innerText) counter.innerText = `${activeIndex + 1} of ${this.$items.length}`
+                                return activeIndex;
                             }
 
                             Carousel.prototype.getItemForDirection = function (direction, active) {
@@ -449,23 +456,27 @@ export default (editor, config = {}) => {
             this.model.set('slides', parseInt(this.model.get('slides')) - 1)
         },
 
-        init() {
-            this.listenTo(this.model, 'change:autoplay change:moveTo change:interval', () => {
-                this.model.setAttributes({
-                    ...this.model.getAttributes(),
-                    'data-interval': this.model.get('interval'),
-                    'data-autoplay': this.model.get('autoplay'),
-                    'data-moveto': this.model.get('moveTo')
-                });
-                this.updateScript();
+        updatePagination() {
 
-                setTimeout(() => {
-                    this.model.set('moveTo', null);
-                    this.updateScript();
-                    }, 600);
+        },
+
+        updatePage() {
+            this.model.setAttributes({
+                ...this.model.getAttributes(),
+                'data-interval': this.model.get('interval'),
+                'data-autoplay': this.model.get('autoplay'),
+                'data-moveto': this.model.get('moveTo')
             });
-            this.listenTo(this.model, 'change:hasGradient', this.handleGradient);
+            this.updatePagination()
+            this.updateScript();
 
+            setTimeout(() => {
+                this.model.set('moveTo', null);
+                this.updateScript();
+            }, 600);
+        },
+
+        init() {
             this.model.setAttributes({
                 'data-interval': this.model.get('interval'),
                 'data-autoplay': this.model.get('autoplay'),
@@ -473,12 +484,16 @@ export default (editor, config = {}) => {
                 ...this.model.getAttributes()
             });
 
+            this.listenTo(this.model, 'change:autoplay change:moveTo change:interval', this.updatePage);
+
             const comps = this.model.components();
 
             // Add a basic template if it's not yet initialized
             if (!comps.length) {
                 comps.add(
                     `
+                    <div id="carousel-page-counter">1 of 3</div>
+
                     <!-- Indicators -->
                     <ol class="carousel-indicators" data-type="${config.prefixName}-indicators">
                         <li data-target="#" data-slide-to="0" class="active" data-gjs-type="indicator"></li>
@@ -487,68 +502,64 @@ export default (editor, config = {}) => {
                     </ol>
 
                     <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
+                    <div class="ch-carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
                         <div class="item carousel-item active" data-gjs-type="slide">
-                            <img src="${slideImgOne}" alt="..." />
-                            <div class="carousel-caption" data-gjs-type="text"> 
+                            <div class="ch-carousel-caption" data-gjs-type="text"> 
                                Slide 1
                             </div>
                         </div>
                         <div class="item carousel-item" data-gjs-type="slide">
-                            <img src="${slideImgTwo}" alt="..." />
-                            <div class="carousel-caption" data-gjs-type="text">
+                            <div class="ch-carousel-caption" data-gjs-type="text">
                                 Slide 2
                             </div>
                         </div>
                         <div class="item carousel-item" data-gjs-type="slide">
-                            <img src="${slideImgThree}" alt="..." />
-                            <div class="carousel-caption" data-gjs-type="text">
+                            <div class="ch-carousel-caption" data-gjs-type="text">
                                 Slide 3
                             </div>
                         </div>
                     </div>
 
                     <!-- Controls -->
-                    <a class="${config.prefixName} left carousel-control" href="#" role="button" data-slide="prev">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 501.5 501.5" style="position: absolute;left: 40%;z-index: 5;top: calc(50% - 25px);">
-                        <g><path fill="#2E435A" d="M302.67 90.877l55.77 55.508L254.575 250.75 358.44 355.116l-55.77 55.506L143.56 250.75z"/></g>
+                    <a class="${config.prefixName} left ch-carousel-control" href="#" role="button" data-slide="prev">
+                        <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.8281 20.7948C10.7344 20.8885 10.5938 20.9354 10.4531 20.9354C10.2656 20.9354 10.125 20.8885 10.0312 20.7948L0.234375 10.951C0.09375 10.8573 0.046875 10.7635 0.046875 10.576C0.046875 10.4354 0.09375 10.2948 0.234375 10.201L10.0312 0.3573C10.125 0.26355 10.2656 0.216675 10.4531 0.216675C10.5938 0.216675 10.7344 0.26355 10.8281 0.3573L11.7656 1.2948C11.8594 1.38855 11.9531 1.52917 11.9531 1.6698C11.9531 1.8573 11.8594 1.99792 11.7656 2.09167L3.28125 10.576L11.7656 19.0604C11.8594 19.201 11.9531 19.3417 11.9531 19.4823C11.9531 19.6698 11.8594 19.7635 11.7656 19.8573L10.8281 20.7948Z" fill="#6F6F6F"/>
                         </svg>
                     </a>
-                    <a class="${config.prefixName} right carousel-control" href="#" role="button" data-slide="next">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 501.5 501.5" style="position: absolute;right: 40%;z-index: 5;top: calc(50% - 25px)">
-                        <g><path fill="#2E435A" d="M199.33 410.622l-55.77-55.508L247.425 250.75 143.56 146.384l55.77-55.507L358.44 250.75z"/></g>
+                    <a class="${config.prefixName} right ch-carousel-control" href="#" role="button" data-slide="next">
+                        <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.17188 0.3573C1.26562 0.26355 1.35938 0.216675 1.54688 0.216675C1.6875 0.216675 1.82812 0.26355 1.96875 0.3573L11.7656 10.201C11.8594 10.2948 11.9531 10.4354 11.9531 10.576C11.9531 10.7635 11.8594 10.8573 11.7656 10.951L1.96875 20.7948C1.82812 20.8885 1.6875 20.9354 1.54688 20.9354C1.35938 20.9354 1.26562 20.8885 1.17188 20.7948L0.234375 19.8573C0.09375 19.7635 0.046875 19.6698 0.046875 19.4823C0.046875 19.3417 0.09375 19.201 0.234375 19.0604L8.71875 10.576L0.234375 2.09167C0.09375 1.99792 0.046875 1.8573 0.046875 1.6698C0.046875 1.52917 0.09375 1.38855 0.234375 1.2948L1.17188 0.3573Z" fill="#6F6F6F"/>
                         </svg>
                     </a>
-                    ${style}
                     `
                 );
             }
         },
 
-        handleGradient() {
+        /*handleGradient() {
             if (this.model.get('hasGradient')) {
                 this.model.removeClass('no-gradient-control');
             } else {
                 this.model.addClass('no-gradient-control');
             }
-        },
+        },*/
 
         click(event) {
             const _class = event.target.getAttribute('class') ? event.target.getAttribute('class').split(' ') : [];
 
-            if (_class.includes('carousel-indicators') || _class.includes('carousel-control')) {
+            if (_class.includes('carousel-indicators') || _class.includes('ch-carousel-control')) {
                 event.preventDefault();
                 event.stopPropagation();
 
                 editor.select(this.model);
             }
 
-            if (_class.includes('carousel-control') && _class.includes('left')) {
+            if (_class.includes('ch-carousel-control') && _class.includes('left')) {
                 // Move left
                 this.model.set('moveTo', 'prev');
             }
 
-            if (_class.includes('carousel-control') && _class.includes('right')) {
+            if (_class.includes('ch-carousel-control') && _class.includes('right')) {
                 // Move right
                 this.model.set('moveTo', 'next');
             }

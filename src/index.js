@@ -19,7 +19,7 @@ export default grapesjs.plugins.add('grapesjs-bootstrap3-carousel-plugin', (edit
 
                 showIndicator: true,
 
-                hasGradient: true,
+                // hasGradient: true,
 
                 showCaptions: true,
 

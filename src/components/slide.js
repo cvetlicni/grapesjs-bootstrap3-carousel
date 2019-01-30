@@ -17,7 +17,7 @@ export default (editor, config = {}) => {
     }, {
         isComponent(el) {
 
-            if (el.tagName === 'DIV' && el.className.includes('carousel-inner') && el.getAttribute && el.getAttribute('data-type') === `${config.prefixName}-slides`) {
+            if (el.tagName === 'DIV' && el.className.includes('ch-carousel-inner') && el.getAttribute && el.getAttribute('data-type') === `${config.prefixName}-slides`) {
                 return {type: TYPE};
             }
             return '';
@@ -91,8 +91,7 @@ export default (editor, config = {}) => {
         increse(comps, n) {
             [...Array(n).keys()].forEach((i) => {
                 let output = `<div class="item carousel-item" data-gjs-type="slide">
-                            <img src="${slideImgOne}" alt="..." />
-                            <div class="carousel-caption" data-gjs-type="text">
+                            <div class="ch-carousel-caption" data-gjs-type="text">
                                 New Slide
                             </div>
                         </div>`;
