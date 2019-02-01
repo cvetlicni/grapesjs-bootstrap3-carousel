@@ -16,6 +16,7 @@ export const
         return `<style>
                         .${name} img {
                           border: 0;
+                          margin: 0;
                         }
                         .${name} svg:not(:root) {
                           overflow: hidden;
@@ -52,12 +53,14 @@ export const
                         .${name}.carousel {
                           position: relative;
                           min-height: 200px;
+                          padding: 1px;
                         }
                         .${name} .ch-carousel-inner {
                           overflow: hidden;
                           width: 100%;
                           min-height: 200px;
                           position: relative;
+                          padding: 1px;
                         }
                         .${name} .captions-container > .ch-carousel-caption {
                           display: none;
@@ -65,11 +68,11 @@ export const
                           -o-transition: 0.6s ease-in-out left;
                           transition: 0.6s ease-in-out left;
                           position: absolute;
-                        left: 0;
-                        right: 0;
-                        margin-left: auto;
-                        margin-right: auto;
-                        width: 80%;
+                          left: 0;
+                          right: 0;
+                          margin-left: auto;
+                          margin-right: auto;
+                          width: 80%;
                         }
                         .${name} .ch-carousel-inner > .item {
                           display: none;

@@ -11,7 +11,8 @@ export default (editor, config = {}) => {
     var model = defaultModel.extend({
         defaults: {
             ...defaultModel.prototype.defaults,
-            traits: []
+            traits: [],
+            orderId: []
         },
 
     }, {
@@ -31,6 +32,11 @@ export default (editor, config = {}) => {
             this.listenTo(this.model.components(), 'remove', this.removeSlide);
             this.listenTo(this.model.parent(), 'change:slides', this.handleSlidesNumChange);
             this.listenTo(this.model.parent(), 'change:showCaptions', this.toggleCaptions);
+            this.orderIds();
+        },
+
+        orderIds() {
+            this.model.set('orderId', this.model.get('components').map(e => e.cid));
         },
 
         toggleCaptions() {
@@ -41,17 +47,33 @@ export default (editor, config = {}) => {
             }
         },
 
-        addSlide() {
+        addSlide(e) {
+            this.orderIds();
             if (this.model.get('shouldRefresh')) {
+                if (e.changed.status === '') {
+                    this.model.parent().view.addSlide();
+                    return;
+                }
+                let position = this.model.components().models.findIndex(f => f.cid === e.cid);
+                let captionComponents = this.model.get('components').parent.parent().components().models[3].components();
+                captionComponents.models[position - 1].removeClass('active');
+                let cloned = captionComponents.models[position - 1].clone();
+                captionComponents.models[0].addClass('active');
+                captionComponents.set(captionComponents.models.slice(0, position).concat([cloned], captionComponents.models.slice(position)));
                 this.model.parent().view.addSlide();
             }
         },
 
-        removeSlide() {
+        removeSlide(e) {
             if (this.model.get('shouldRefresh')) {
+                let position = this.model.get('orderId').findIndex(cid => cid === e.cid);
+                let captionComponents = this.model.get('components').parent.parent().components().models[3].components();
+                captionComponents.set(captionComponents.models.slice(0, position).concat(captionComponents.models.slice(position + 1)));
+                captionComponents.models[0].addClass('active');
                 this.resetActive(this.model.get('components'));
                 this.model.parent().view.removeSlide();
             }
+            this.orderIds();
         },
 
         handleSlidesNumChange() {

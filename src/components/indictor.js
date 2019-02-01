@@ -12,6 +12,7 @@ export default (editor, config = {}) => {
     var model = baseModel.extend({
         defaults: {
             ...baseModel.prototype.defaults,
+            selected: 0,
             traits: []
         },
 

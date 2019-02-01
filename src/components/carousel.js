@@ -216,6 +216,7 @@ export default (editor, config = {}) => {
                             }
 
                             Carousel.prototype.slide = function (type, next, nextCaption) {
+                                this.$indicators = this.$element.find('.carousel-indicators');
                                 var $active = this.$element.find('.item.active')
                                 var nextIndex = this.getItemForDirection(type, $active)
                                 var $next = next || this.$items.eq(nextIndex);
@@ -461,11 +462,11 @@ export default (editor, config = {}) => {
         },
 
         addSlide() {
-            this.model.set('slides', parseInt(this.model.get('slides')) + 1)
+            this.model.set('slides', parseInt(this.model.get('slides')) + 1);
         },
 
         removeSlide() {
-            this.model.set('slides', parseInt(this.model.get('slides')) - 1)
+            this.model.set('slides', parseInt(this.model.get('slides')) - 1);
         },
 
         updatePage() {
@@ -480,7 +481,7 @@ export default (editor, config = {}) => {
             setTimeout(() => {
                 this.model.set('moveTo', null);
                 this.updateScript();
-            }, 610);
+            }, 600);
         },
 
         init() {
