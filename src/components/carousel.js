@@ -476,7 +476,7 @@ export default (editor, config = {}) => {
         updatePage() {
             this.model.setAttributes({
                 'data-interval': this.model.get('interval'),
-                'data-autoplay': this.model.get('autoPlay') ? 1 : 0,
+                'data-autoplay': this.model.get('autoplay') ? 1 : 0,
                 ...this.model.getAttributes(),
                 'data-moveto': this.model.get('moveTo')
             });
@@ -498,6 +498,7 @@ export default (editor, config = {}) => {
             } else {
                 this.model.addClass('indicator-none');
             }
+            console.log(this.model.get('showIndicator'));
         },
 
         updateCaptions() {
@@ -505,12 +506,13 @@ export default (editor, config = {}) => {
                 ...this.model.getAttributes(),
                 'data-captions': this.model.get('showCaptions') == true ? 1 : 0
             });
+            console.log(this.model.get('showCaptions'));
         },
 
         updateAutoplay() {
             this.model.setAttributes({
                 ...this.model.getAttributes(),
-                'data-autoplay': this.model.get('autoPlay') == true ? 1 : 0
+                'data-autoplay': this.model.get('autoplay') == true ? 1 : 0
             })
         },
 
@@ -526,17 +528,17 @@ export default (editor, config = {}) => {
             this.listenTo(this.model, 'change:autoplay change:moveTo change:interval', this.updatePage);
             this.listenTo(this.model, 'change:showIndicator', this.updateIndicator);
             this.listenTo(this.model, 'change:showCaptions', this.updateCaptions);
-            this.listenTo(this.model, 'change:autoPlay', this.updateAutoplay);
+            this.listenTo(this.model, 'change:autoplay', this.updateAutoplay);
             this.listenTo(this.model, 'change:interval', this.updateInterval);
 
             const comps = this.model.components();
 
             setTimeout(() => {
-                this.model.set('slides', this.model.view.el.childNodes[2].childNodes.length)
-                this.model.set('showCaptions', Boolean(this.model.getAttributes()['data-captions']) == 1 ? true : false)
-                this.model.set('showIndicator', this.model.getAttributes()['data-indicators'] == 1 ? true : false)
-                this.model.set('autoPlay', this.model.getAttributes()['data-autoplay'] == 1 ? true : false)
-                this.model.set('interval', Number(this.model.getAttributes()['data-interval']))
+                this.model.set('slides', this.model.view.el.childNodes[2].childNodes.length);
+                this.model.set('showCaptions', this.model.getAttributes()['data-captions'] == 1 ? true : false);
+                this.model.set('showIndicator', this.model.getAttributes()['data-indicators'] == 1 ? true : false);
+                this.model.set('autoplay', this.model.getAttributes()['data-autoplay'] == 1 ? true : false);
+                this.model.set('interval', Number(this.model.getAttributes()['data-interval']));
             }, 100);
 
             // Add a basic template if it's not yet initialized

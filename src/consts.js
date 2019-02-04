@@ -212,12 +212,12 @@ export const
                           background-color: rgba(0, 0, 0, 0);
                         }
                         .${name} .ch-carousel-control.left {
-                          left: -10px;
+                          left: -2%;
                           height: 100%;
                         }
                         .${name} .ch-carousel-control.right {
                           left: auto;
-                          right: -10px;
+                          right: -2%;
                           height: 100%;
                         }
                         .${name} .ch-carousel-control.right svg {
@@ -357,7 +357,7 @@ export const
                               left: calc(50% - 50px);
                               width: 30px;
                               height: 30px;
-                              bottom: -35px;
+                              bottom: -95px;
                               top: auto;
                               text-align: left;
                               z-index: 1500;
@@ -370,7 +370,7 @@ export const
                               right: calc(50% - 50px);
                               width: 30px;
                               height: 30px;
-                              bottom: -35px;
+                              bottom: -95px;
                               top: auto;
                               z-index: 1500;
                             }

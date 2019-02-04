@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09bfede4-6033-44d4-9698-c6690e8d77e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/grapesjs-bootstrap3-carousel-plugin.min.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/carousel.js" afterDir="false" />
@@ -24,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/consts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="330" column="25" lean-forward="true" selection-start-line="330" selection-start-column="25" selection-end-line="330" selection-end-column="25" />
+            <state relative-caret-position="881">
+              <caret line="234" column="52" lean-forward="true" selection-start-line="234" selection-start-column="52" selection-end-line="234" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -69,8 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/carousel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-12415">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="1013">
+              <caret line="537" column="90" lean-forward="true" selection-start-line="537" selection-start-column="90" selection-end-line="537" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -79,10 +79,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.slide(</find>
-      <find>removeClass</find>
-      <find>render</find>
-      <find>indicator</find>
       <find>this.render</find>
       <find>offsetWidth</find>
       <find>add</find>
@@ -98,17 +94,21 @@
       <find>no-</find>
       <find>caption-none</find>
       <find>toggleCa</find>
-      <find>showCaptions</find>
       <find>data-autopla</find>
-      <find>autoplay</find>
       <find>data-autoplay</find>
       <find>change:interva</find>
       <find>toggle</find>
-      <find>console.log</find>
       <find>left: 0</find>
       <find>.carousel</find>
       <find>clear</find>
+      <find>bottom: -30</find>
       <find>init(</find>
+      <find>ch-carousel-control.lef</find>
+      <find>autoplay</find>
+      <find>traits</find>
+      <find>autoPlay</find>
+      <find>console.log</find>
+      <find>showCaptions</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/node_modules/grapesjs</dir>
@@ -222,12 +222,12 @@
       <workItem from="1549048510553" duration="2200000" />
       <workItem from="1549101780361" duration="3000" />
       <workItem from="1549101817024" duration="1000" />
-      <workItem from="1549189590528" duration="16585000" />
+      <workItem from="1549189590528" duration="17838000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125673000" />
+    <option name="totallyTimeSpent" value="126926000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1680" y="-367" width="2560" height="1417" extended-state="6" />
@@ -367,13 +367,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/consts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="330" column="25" lean-forward="true" selection-start-line="330" selection-start-column="25" selection-end-line="330" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -388,10 +381,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/consts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="881">
+          <caret line="234" column="52" lean-forward="true" selection-start-line="234" selection-start-column="52" selection-end-line="234" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/carousel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12415">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="1013">
+          <caret line="537" column="90" lean-forward="true" selection-start-line="537" selection-start-column="90" selection-end-line="537" selection-end-column="90" />
         </state>
       </provider>
     </entry>
