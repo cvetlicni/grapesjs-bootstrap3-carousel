@@ -498,7 +498,6 @@ export default (editor, config = {}) => {
             } else {
                 this.model.addClass('indicator-none');
             }
-            console.log(this.model.get('showIndicator'));
         },
 
         updateCaptions() {
@@ -506,7 +505,6 @@ export default (editor, config = {}) => {
                 ...this.model.getAttributes(),
                 'data-captions': this.model.get('showCaptions') == true ? 1 : 0
             });
-            console.log(this.model.get('showCaptions'));
         },
 
         updateAutoplay() {
