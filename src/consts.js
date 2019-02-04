@@ -14,6 +14,18 @@ export const
     // Styles
     styleGen = function (name) {
         return `<style>
+                        .${name} {
+                            margin-bottom: 60px;
+                        }
+                        .${name}.indicator-none {
+                            margin-bottom: 30px;
+                        }
+                        .${name}.caption-none {
+                            margin-bottom: 30px;
+                        }
+                        .${name}.caption-none.indicator-none {
+                            margin-bottom: 60px;
+                        }
                         .${name} img {
                           border: 0;
                           margin: 0;

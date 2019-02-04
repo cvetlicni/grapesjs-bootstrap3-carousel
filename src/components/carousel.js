@@ -1,11 +1,11 @@
 import {compCarouselName, slideImgOne, slideImgThree, slideImgTwo, styleGen} from '../consts';
 
 export default (editor, config = {}) => {
-    const style = styleGen(config.prefixName);
-    let shortStyle = JSON.stringify(style);
-    shortStyle = shortStyle.replace(/\\n/g, '');
-    shortStyle = shortStyle.replace(/  /g, '');
-    console.log(shortStyle);
+    // const style = styleGen(config.prefixName);
+    // let shortStyle = JSON.stringify(style);
+    // shortStyle = shortStyle.replace(/\\n/g, '');
+    // shortStyle = shortStyle.replace(/  /g, '');
+    // console.log(shortStyle);
 
     const domc = editor.DomComponents;
     const defaultType = domc.getType('default');
@@ -21,8 +21,12 @@ export default (editor, config = {}) => {
 
             attributes: {
                 class: `${config.prefixName} carousel slide`,
+                'data-autoplay': 1,
                 'data-ride': 'carousel',
-                'data-type': `${config.prefixName}`
+                'data-type': `${config.prefixName}`,
+                'data-captions': 1,
+                'data-indicators': 1,
+                'data-interval': 5000
             },
 
             slides: config.slides,
@@ -66,7 +70,7 @@ export default (editor, config = {}) => {
             }*/],
             script: function () {
                 var interval = this.getAttribute('data-interval') || '5000';
-                var autoplay = this.getAttribute('data-autoplay') || false;
+                var autoplay = this.getAttribute('data-autoplay') == 1;
                 var moveTo = this.getAttribute('data-moveto') || '';
                 // Set the ID
                 var id = this.id;
@@ -471,9 +475,9 @@ export default (editor, config = {}) => {
 
         updatePage() {
             this.model.setAttributes({
-                ...this.model.getAttributes(),
                 'data-interval': this.model.get('interval'),
-                'data-autoplay': this.model.get('autoplay'),
+                'data-autoplay': this.model.get('autoPlay') ? 1 : 0,
+                ...this.model.getAttributes(),
                 'data-moveto': this.model.get('moveTo')
             });
             this.updateScript();
@@ -484,17 +488,56 @@ export default (editor, config = {}) => {
             }, 600);
         },
 
-        init() {
+        updateIndicator() {
             this.model.setAttributes({
-                'data-interval': this.model.get('interval'),
-                'data-autoplay': this.model.get('autoplay'),
-                'data-moveto': this.model.get('moveTo'),
-                ...this.model.getAttributes()
+                ...this.model.getAttributes(),
+                'data-indicators': this.model.get('showIndicator') == true ? 1 : 0
             });
+            if (this.model.get('showIndicator')) {
+                this.model.removeClass('indicator-none');
+            } else {
+                this.model.addClass('indicator-none');
+            }
+        },
+
+        updateCaptions() {
+            this.model.setAttributes({
+                ...this.model.getAttributes(),
+                'data-captions': this.model.get('showCaptions') == true ? 1 : 0
+            });
+        },
+
+        updateAutoplay() {
+            this.model.setAttributes({
+                ...this.model.getAttributes(),
+                'data-autoplay': this.model.get('autoPlay') == true ? 1 : 0
+            })
+        },
+
+        updateInterval() {
+            this.model.setAttributes({
+                ...this.model.getAttributes(),
+                'data-interval': this.model.get('interval')
+            })
+        },
+
+        init() {
 
             this.listenTo(this.model, 'change:autoplay change:moveTo change:interval', this.updatePage);
+            this.listenTo(this.model, 'change:showIndicator', this.updateIndicator);
+            this.listenTo(this.model, 'change:showCaptions', this.updateCaptions);
+            this.listenTo(this.model, 'change:autoPlay', this.updateAutoplay);
+            this.listenTo(this.model, 'change:interval', this.updateInterval);
 
             const comps = this.model.components();
+
+            setTimeout(() => {
+                this.model.set('slides', this.model.view.el.childNodes[2].childNodes.length)
+                this.model.set('showCaptions', Boolean(this.model.getAttributes()['data-captions']) == 1 ? true : false)
+                this.model.set('showIndicator', this.model.getAttributes()['data-indicators'] == 1 ? true : false)
+                this.model.set('autoPlay', this.model.getAttributes()['data-autoplay'] == 1 ? true : false)
+                this.model.set('interval', Number(this.model.getAttributes()['data-interval']))
+            }, 100);
 
             // Add a basic template if it's not yet initialized
             if (!comps.length) {
@@ -511,15 +554,9 @@ export default (editor, config = {}) => {
 
                     <!-- Wrapper for slides -->
                     <div class="ch-carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
-                        <div class="item carousel-item active" data-gjs-type="slide">
-                           
-                        </div>
-                        <div class="item carousel-item" data-gjs-type="slide">
-                           
-                        </div>
-                        <div class="item carousel-item" data-gjs-type="slide">
-                            
-                        </div>
+                        <div class="item carousel-item active" data-gjs-ype="slide"></div>
+                        <div class="item carousel-item" data-gjs-type="slide"></div>
+                        <div class="item carousel-item" data-gjs-type="slide"></div>
                     </div>
                     
                     <div class="captions-container">
@@ -545,7 +582,6 @@ export default (editor, config = {}) => {
                             <path d="M1.17188 0.3573C1.26562 0.26355 1.35938 0.216675 1.54688 0.216675C1.6875 0.216675 1.82812 0.26355 1.96875 0.3573L11.7656 10.201C11.8594 10.2948 11.9531 10.4354 11.9531 10.576C11.9531 10.7635 11.8594 10.8573 11.7656 10.951L1.96875 20.7948C1.82812 20.8885 1.6875 20.9354 1.54688 20.9354C1.35938 20.9354 1.26562 20.8885 1.17188 20.7948L0.234375 19.8573C0.09375 19.7635 0.046875 19.6698 0.046875 19.4823C0.046875 19.3417 0.09375 19.201 0.234375 19.0604L8.71875 10.576L0.234375 2.09167C0.09375 1.99792 0.046875 1.8573 0.046875 1.6698C0.046875 1.52917 0.09375 1.38855 0.234375 1.2948L1.17188 0.3573Z" fill="#6F6F6F"/>
                         </svg>
                     </a>
-                    ${style}
                     `
                 );
             }

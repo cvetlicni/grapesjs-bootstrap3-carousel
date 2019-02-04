@@ -1,12 +1,13 @@
 {
   "name": "grapesjs-bootstrap3-carousel-plugin",
-  "version": "0.0.51",
+  "version": "0.0.115",
   "description": "GrapesJS Plugin Bootstrap3 Carousel -> forked repo @ https://github.com/omarmd1986/grapesjs-plugin-carousel.git",
   "main": "dist/grapesjs-plugin-carousel.min.js",
   "scripts": {
     "lint": "eslint src",
     "v:patch": "npm version --no-git-tag-version patch",
     "build": "npm run v:patch && webpack --env.production",
+    "buildMove": "npm run v:patch && webpack --env.production && cp -r dist ../../../carthook/editor.carthook.com/node_modules/grapesjs-bootstrap3-carousel-plugin/",
     "start": "webpack-dev-server --open --progress --colors"
   },
   "repository": {

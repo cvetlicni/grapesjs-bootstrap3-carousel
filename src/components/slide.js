@@ -113,8 +113,8 @@ export default (editor, config = {}) => {
 
         increse(comps, n) {
             [...Array(n).keys()].forEach((i) => {
-                let output = `<div class="item carousel-item" data-gjs-type="slide"></div>`;
-                let outputCaption = `<div class="ch-carousel-caption" data-gjs-type="text">New Slide</div>`;
+                let output = `<div class="item carousel-item" data-type="slide"></div>`;
+                let outputCaption = `<div class="ch-carousel-caption" data-type="text">New Slide</div>`;
                 comps.add(output);
                 comps.parent.parent().components().models[3].components().add(outputCaption);
             });
