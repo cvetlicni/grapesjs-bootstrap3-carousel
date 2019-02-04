@@ -52,16 +52,26 @@ export default (editor, config = {}) => {
             if (this.model.get('shouldRefresh')) {
                 if (e.changed.status === '') {
                     this.model.parent().view.addSlide();
+                    this.resetCaptions();
                     return;
                 }
                 let position = this.model.components().models.findIndex(f => f.cid === e.cid);
                 let captionComponents = this.model.get('components').parent.parent().components().models[3].components();
-                captionComponents.models[position - 1].removeClass('active');
                 let cloned = captionComponents.models[position - 1].clone();
-                captionComponents.models[0].addClass('active');
                 captionComponents.set(captionComponents.models.slice(0, position).concat([cloned], captionComponents.models.slice(position)));
                 this.model.parent().view.addSlide();
+                this.resetCaptionsAndUpdateLength();
             }
+        },
+
+        resetCaptionsAndUpdateLength() {
+            let compsCaption = this.model.parent().get('components').models[3].get('components');
+            [...Array(compsCaption.length).keys()].forEach((i) => {
+                compsCaption.at(i).setClass('ch-carousel-caption');
+            });
+
+            compsCaption.at(0).addClass('active');
+            this.model.parent().get('components').models[0].view.el.innerHTML = `${1} of ${this.model.get('components').length}`
         },
 
         removeSlide(e) {
