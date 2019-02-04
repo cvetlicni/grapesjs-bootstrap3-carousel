@@ -17,15 +17,6 @@ export const
                         .${name} {
                             margin-bottom: 60px;
                         }
-                        .${name}.indicator-none {
-                            margin-bottom: 30px;
-                        }
-                        .${name}.caption-none {
-                            margin-bottom: 30px;
-                        }
-                        .${name}.caption-none.indicator-none {
-                            margin-bottom: 60px;
-                        }
                         .${name} img {
                           border: 0;
                           margin: 0;
@@ -65,7 +56,7 @@ export const
                         .${name}.carousel {
                           position: relative;
                           min-height: 200px;
-                          padding: 1px;
+                          padding: 1px 20px;   
                         }
                         .${name} .ch-carousel-inner {
                           overflow: hidden;
@@ -221,11 +212,13 @@ export const
                           background-color: rgba(0, 0, 0, 0);
                         }
                         .${name} .ch-carousel-control.left {
-                          left: 0;
+                          left: -10px;
+                          height: 100%;
                         }
                         .${name} .ch-carousel-control.right {
                           left: auto;
-                          right: 0;
+                          right: -10px;
+                          height: 100%;
                         }
                         .${name} .ch-carousel-control.right svg {
                           left: calc(50% - 6px);
@@ -338,14 +331,6 @@ export const
                           .${name} .carousel-indicators {
                             bottom: 20px;
                           }
-                        }
-                        .${name} .clearfix:before,
-                        .${name} .clearfix:after {
-                          content: " ";
-                          display: table;
-                        }
-                        .${name} .clearfix:after {
-                          clear: both;
                         }
                         .${name} .center-block {
                           display: block;
