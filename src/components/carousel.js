@@ -18,12 +18,13 @@ export default (editor, config = {}) => {
             ...defaultModel.prototype.defaults,
             interval: config.interval,
             droppable: false,
+            removable: true,
 
             attributes: {
-                class: `${config.prefixName} carousel slide`,
+                class: `${config.prefixName} bst-carousel carousel slide`,
                 'data-autoplay': 1,
                 'data-ride': 'carousel',
-                'data-type': `${config.prefixName}`,
+                'data-type': 'slider',
                 'data-captions': 1,
                 'data-indicators': 1,
                 'data-interval': 5000
@@ -33,6 +34,7 @@ export default (editor, config = {}) => {
             autoplay: config.autoplay,
             showCaptions: config.showCaptions,
             showIndicator: config.showIndicator,
+            autoplayStopped: false,
             // hasGradient: config.hasGradient,
 
             moveTo: null, // To move left or right
@@ -68,6 +70,9 @@ export default (editor, config = {}) => {
                 changeProp: 1,
                 type: 'checkbox'
             }*/],
+            toolbar: [{attributes: {class: 'far fa-trash-alt'}, command: 'tlb-delete'},
+                {attributes: {class: 'far fa-arrows'}, command: 'tlb-move'},
+                {attributes: {class: 'far fa-arrow-up'}, command: 'select-parent'}],
             script: function () {
                 var interval = this.getAttribute('data-interval') || '5000';
                 var autoplay = this.getAttribute('data-autoplay') == 1;
@@ -263,7 +268,7 @@ export default (editor, config = {}) => {
                                 if ($.support.transition && this.$element.hasClass('slide')) {
                                     $next.addClass(type)
                                     $nextCaption.addClass(type)
-                                    $next[0].offsetWidth // force reflow
+                                    if ($next[0]) $next[0].offsetWidth // force reflow
                                     $active.addClass(direction)
                                     $activeCaption.addClass(direction)
                                     $next.addClass(direction)
@@ -451,7 +456,7 @@ export default (editor, config = {}) => {
         }
     }, {
         isComponent(el) {
-            if (el.getAttribute && el.getAttribute('data-type') === config.prefixName) {
+            if (el.getAttribute && el.getAttribute('data-type') === 'slider') {
                 return {type: compCarouselName};
             }
             return '';
@@ -522,6 +527,17 @@ export default (editor, config = {}) => {
         },
 
         init() {
+            /*editor.on('component:selected', model => {
+                if (model.get('type') === 'slide') {
+                    console.log('no autoplay')
+                    this.model.set('autoplayStopped', this.model.getAttributes()['data-autoplay'] == 1 ? true : false)
+                    this.model.set('autoplay', false);
+                }
+            })
+            editor.on('component:deselected', model => {
+                this.model.set('autoplay', this.model.get('autoplayStopped'));
+                this.model.set('autoplayStopped', false)
+            })*/
 
             this.listenTo(this.model, 'change:autoplay change:moveTo change:interval', this.updatePage);
             this.listenTo(this.model, 'change:showIndicator', this.updateIndicator);
@@ -547,44 +563,45 @@ export default (editor, config = {}) => {
 
                     <!-- Indicators -->
                     <ol class="carousel-indicators" data-type="${config.prefixName}-indicators">
-                        <li data-target="#" data-slide-to="0" class="active" data-gjs-type="indicator"></li>
-                        <li data-target="#" data-slide-to="1" data-gjs-type="indicator"></li>
-                        <li data-target="#" data-slide-to="2" data-gjs-type="indicator"></li>
+                        <li data-target="#" data-slide-to="0" class="active indicator-point" data-gjs-type="indicator-point" data-type="indicator-point"></li>
+                        <li data-target="#" data-slide-to="1" class="indicator-point" data-gjs-type="indicator-point" data-type="indicator-point"></li>
+                        <li data-target="#" data-slide-to="2" class="indicator-point" data-gjs-type="indicator-point" data-type="indicator-point"></li>
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="ch-carousel-inner" role="listbox" data-type="${config.prefixName}-slides">
-                        <div class="item carousel-item active" data-gjs-ype="slide"></div>
-                        <div class="item carousel-item" data-gjs-type="slide"></div>
-                        <div class="item carousel-item" data-gjs-type="slide"></div>
+                        <div class="item carousel-item active" data-gjs-type="slide" data-type="slide"></div>
+                        <div class="item carousel-item" data-gjs-type="slide" data-type="slide"></div>
+                        <div class="item carousel-item" data-gjs-type="slide" data-type="slide"></div>
                     </div>
                     
                     <div class="captions-container">
-                        <div class="ch-carousel-caption active" data-gjs-type="text">
+                        <div class="ch-carousel-caption active" data-gjs-type="text" data-type="text">
                             Slide 1
                         </div>
-                        <div class="ch-carousel-caption" data-gjs-type="text">
+                        <div class="ch-carousel-caption" data-gjs-type="text" data-type="text">
                             Slide 2
                         </div>
-                        <div class="ch-carousel-caption" data-gjs-type="text">
+                        <div class="ch-carousel-caption" data-gjs-type="text" data-type="text">
                             Slide 3
                         </div>
                     </div>
 
                     <!-- Controls -->
                     <a class="${config.prefixName} left ch-carousel-control" href="#" role="button" data-slide="prev">
-                        <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.8281 20.7948C10.7344 20.8885 10.5938 20.9354 10.4531 20.9354C10.2656 20.9354 10.125 20.8885 10.0312 20.7948L0.234375 10.951C0.09375 10.8573 0.046875 10.7635 0.046875 10.576C0.046875 10.4354 0.09375 10.2948 0.234375 10.201L10.0312 0.3573C10.125 0.26355 10.2656 0.216675 10.4531 0.216675C10.5938 0.216675 10.7344 0.26355 10.8281 0.3573L11.7656 1.2948C11.8594 1.38855 11.9531 1.52917 11.9531 1.6698C11.9531 1.8573 11.8594 1.99792 11.7656 2.09167L3.28125 10.576L11.7656 19.0604C11.8594 19.201 11.9531 19.3417 11.9531 19.4823C11.9531 19.6698 11.8594 19.7635 11.7656 19.8573L10.8281 20.7948Z" fill="#6F6F6F"/>
+                        <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="carousel-svg left" data-type="svg" data-gjs-type="svg">
+                            <path class="carousel-svg left" d="M10.8281 20.7948C10.7344 20.8885 10.5938 20.9354 10.4531 20.9354C10.2656 20.9354 10.125 20.8885 10.0312 20.7948L0.234375 10.951C0.09375 10.8573 0.046875 10.7635 0.046875 10.576C0.046875 10.4354 0.09375 10.2948 0.234375 10.201L10.0312 0.3573C10.125 0.26355 10.2656 0.216675 10.4531 0.216675C10.5938 0.216675 10.7344 0.26355 10.8281 0.3573L11.7656 1.2948C11.8594 1.38855 11.9531 1.52917 11.9531 1.6698C11.9531 1.8573 11.8594 1.99792 11.7656 2.09167L3.28125 10.576L11.7656 19.0604C11.8594 19.201 11.9531 19.3417 11.9531 19.4823C11.9531 19.6698 11.8594 19.7635 11.7656 19.8573L10.8281 20.7948Z" fill="#6F6F6F"/>
                         </svg>
                     </a>
                     <a class="${config.prefixName} right ch-carousel-control" href="#" role="button" data-slide="next">
-                        <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.17188 0.3573C1.26562 0.26355 1.35938 0.216675 1.54688 0.216675C1.6875 0.216675 1.82812 0.26355 1.96875 0.3573L11.7656 10.201C11.8594 10.2948 11.9531 10.4354 11.9531 10.576C11.9531 10.7635 11.8594 10.8573 11.7656 10.951L1.96875 20.7948C1.82812 20.8885 1.6875 20.9354 1.54688 20.9354C1.35938 20.9354 1.26562 20.8885 1.17188 20.7948L0.234375 19.8573C0.09375 19.7635 0.046875 19.6698 0.046875 19.4823C0.046875 19.3417 0.09375 19.201 0.234375 19.0604L8.71875 10.576L0.234375 2.09167C0.09375 1.99792 0.046875 1.8573 0.046875 1.6698C0.046875 1.52917 0.09375 1.38855 0.234375 1.2948L1.17188 0.3573Z" fill="#6F6F6F"/>
+                        <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="carousel-svg right" data-type="svg" data-gjs-type="svg">
+                            <path class="carousel-svg right" d="M1.17188 0.3573C1.26562 0.26355 1.35938 0.216675 1.54688 0.216675C1.6875 0.216675 1.82812 0.26355 1.96875 0.3573L11.7656 10.201C11.8594 10.2948 11.9531 10.4354 11.9531 10.576C11.9531 10.7635 11.8594 10.8573 11.7656 10.951L1.96875 20.7948C1.82812 20.8885 1.6875 20.9354 1.54688 20.9354C1.35938 20.9354 1.26562 20.8885 1.17188 20.7948L0.234375 19.8573C0.09375 19.7635 0.046875 19.6698 0.046875 19.4823C0.046875 19.3417 0.09375 19.201 0.234375 19.0604L8.71875 10.576L0.234375 2.09167C0.09375 1.99792 0.046875 1.8573 0.046875 1.6698C0.046875 1.52917 0.09375 1.38855 0.234375 1.2948L1.17188 0.3573Z" fill="#6F6F6F"/>
                         </svg>
                     </a>
                     ${style}
                     `
                 );
+                setTimeout(() => editor.select(this.model), 100);
             }
         },
 
@@ -599,19 +616,19 @@ export default (editor, config = {}) => {
         click(event) {
             const _class = event.target.getAttribute('class') ? event.target.getAttribute('class').split(' ') : [];
 
-            if (_class.includes('carousel-indicators') || _class.includes('ch-carousel-control')) {
+            if (_class.includes('carousel-indicators') || _class.includes('ch-carousel-control') || _class.includes('carousel-svg')) {
                 event.preventDefault();
                 event.stopPropagation();
 
                 editor.select(this.model);
             }
 
-            if (_class.includes('ch-carousel-control') && _class.includes('left')) {
+            if ((_class.includes('ch-carousel-control') || _class.includes('carousel-svg')) && _class.includes('left')) {
                 // Move left
                 this.model.set('moveTo', 'prev');
             }
 
-            if (_class.includes('ch-carousel-control') && _class.includes('right')) {
+            if ((_class.includes('ch-carousel-control') || _class.includes('carousel-svg')) && _class.includes('right')) {
                 // Move right
                 this.model.set('moveTo', 'next');
             }

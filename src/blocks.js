@@ -4,7 +4,7 @@ export default (editor, config = {}) => {
     const blockManager = editor.BlockManager;
 
     blockManager.add(`${config.prefixName}-carousel`, {
-        label: `Carousel`,
+        label: `Slider`,
         content: {type: compCarouselName},
         attributes: {class: 'fa fa-sliders'},
         ...config.carouselBlock

@@ -11,6 +11,7 @@ export default (editor, config = {}) => {
     var model = defaultModel.extend({
         defaults: {
             ...defaultModel.prototype.defaults,
+            draggable: false,
             traits: [],
             orderId: []
         },
@@ -52,7 +53,7 @@ export default (editor, config = {}) => {
             if (this.model.get('shouldRefresh')) {
                 if (e.changed.status === '') {
                     this.model.parent().view.addSlide();
-                    this.resetCaptions();
+                    this.resetCaptionsAndUpdateLength();
                     return;
                 }
                 let position = this.model.components().models.findIndex(f => f.cid === e.cid);
@@ -72,6 +73,7 @@ export default (editor, config = {}) => {
 
             compsCaption.at(0).addClass('active');
             this.model.parent().get('components').models[0].view.el.innerHTML = `${1} of ${this.model.get('components').length}`
+            setTimeout(() => editor.select(this.model.get('components').at(0)), 0);
         },
 
         removeSlide(e) {
@@ -79,7 +81,7 @@ export default (editor, config = {}) => {
                 let position = this.model.get('orderId').findIndex(cid => cid === e.cid);
                 let captionComponents = this.model.get('components').parent.parent().components().models[3].components();
                 captionComponents.set(captionComponents.models.slice(0, position).concat(captionComponents.models.slice(position + 1)));
-                captionComponents.models[0].addClass('active');
+                this.resetCaptionsAndUpdateLength();
                 this.resetActive(this.model.get('components'));
                 this.model.parent().view.removeSlide();
             }
@@ -132,7 +134,7 @@ export default (editor, config = {}) => {
 
         resetActive(comps){
             [...Array(comps.length).keys()].forEach((i) => {
-                comps.at(i).setClass('item');
+                comps.at(i).setClass('item carousel-item');
             });
 
             comps.at(0).addClass('active');

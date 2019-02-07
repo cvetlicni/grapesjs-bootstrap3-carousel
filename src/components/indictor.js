@@ -53,7 +53,7 @@ export default (editor, config = {}) => {
 
             [...Array(n).keys()].forEach((i) => {
                 let _c = i === 0 ? 'active': '';
-                output += `<li data-target="#${id}" data-slide-to="${i}" class="${_c}" data-type="indicator"></li>`;
+                output += `<li data-target="#${id}" data-slide-to="${i}" class="${_c} indicator-point" data-type="indicator-point" data-gjs-type="indicator-point"></li>`;
             });
 
             comps.reset();
