@@ -1,11 +1,13 @@
 import {compCarouselName, slideImgOne, slideImgThree, slideImgTwo, styleGen} from '../consts';
 
 export default (editor, config = {}) => {
-    const style = styleGen(config.prefixName);
-    let shortStyle = JSON.stringify(style);
-    shortStyle = shortStyle.replace(/\\n/g, '');
-    shortStyle = shortStyle.replace(/  /g, '');
-    console.log(shortStyle);
+    const style = JSON.stringify(styleGen(config.prefixName));
+    let shortStyle = style.replace(/\\n/g, '');
+    shortStyle = JSON.parse(shortStyle
+        .replace(/\\n/g, '')
+        .replace(/  /g, '')
+        .replace(/<style>/gmi, '')
+        .replace(/<\/style>/gmi, ''));
 
     const domc = editor.DomComponents;
     const defaultType = domc.getType('default');
@@ -34,7 +36,6 @@ export default (editor, config = {}) => {
             autoplay: config.autoplay,
             showCaptions: config.showCaptions,
             showIndicator: config.showIndicator,
-            autoplayStopped: false,
             // hasGradient: config.hasGradient,
 
             moveTo: null, // To move left or right
@@ -45,22 +46,22 @@ export default (editor, config = {}) => {
                 changeProp: 1,
                 type: 'checkbox'
             }, {
-                label: 'Interval',
+                label: 'Interval between slides',
                 name: 'interval',
                 changeProp: 1,
                 type: 'number'
             }, {
-                label: '# Slides',
+                label: 'Number of slides',
                 name: 'slides',
                 changeProp: 1,
                 type: 'number'
             }, {
-                label: 'Captions',
+                label: 'Show captions',
                 name: 'showCaptions',
                 changeProp: 1,
                 type: 'checkbox'
             }, {
-                label: 'Indicators',
+                label: 'Show indicators',
                 name: 'showIndicator',
                 changeProp: 1,
                 type: 'checkbox'
@@ -527,17 +528,16 @@ export default (editor, config = {}) => {
         },
 
         init() {
-            /*editor.on('component:selected', model => {
-                if (model.get('type') === 'slide') {
-                    console.log('no autoplay')
-                    this.model.set('autoplayStopped', this.model.getAttributes()['data-autoplay'] == 1 ? true : false)
-                    this.model.set('autoplay', false);
+            var intervalLoop;
+            editor.on('component:selected', model => {
+                if (model.get('type') === 'slide' || (model.parent() && model.parent().get('type') === 'slide')) {
+                    this.updateScript();
+                    intervalLoop = setInterval(() => this.updateScript(), this.model.get('interval') - 100);
                 }
             })
             editor.on('component:deselected', model => {
-                this.model.set('autoplay', this.model.get('autoplayStopped'));
-                this.model.set('autoplayStopped', false)
-            })*/
+                clearInterval(intervalLoop);
+            })
 
             this.listenTo(this.model, 'change:autoplay change:moveTo change:interval', this.updatePage);
             this.listenTo(this.model, 'change:showIndicator', this.updateIndicator);
@@ -557,6 +557,15 @@ export default (editor, config = {}) => {
 
             // Add a basic template if it's not yet initialized
             if (!comps.length) {
+                var styles = '';
+                var editorCss = editor.getCss({keepUnusedStyles: true});
+                if (!editorCss.includes('.bst-carousel')) {
+                    styles = editorCss + shortStyle;
+                }
+                if (styles) {
+                    editor.CssComposer.clear();
+                    editor.setStyle(styles);
+                }
                 comps.add(
                     `
                     <div class="carousel-page-counter">1 of 3</div>
@@ -598,10 +607,11 @@ export default (editor, config = {}) => {
                             <path class="carousel-svg right" d="M1.17188 0.3573C1.26562 0.26355 1.35938 0.216675 1.54688 0.216675C1.6875 0.216675 1.82812 0.26355 1.96875 0.3573L11.7656 10.201C11.8594 10.2948 11.9531 10.4354 11.9531 10.576C11.9531 10.7635 11.8594 10.8573 11.7656 10.951L1.96875 20.7948C1.82812 20.8885 1.6875 20.9354 1.54688 20.9354C1.35938 20.9354 1.26562 20.8885 1.17188 20.7948L0.234375 19.8573C0.09375 19.7635 0.046875 19.6698 0.046875 19.4823C0.046875 19.3417 0.09375 19.201 0.234375 19.0604L8.71875 10.576L0.234375 2.09167C0.09375 1.99792 0.046875 1.8573 0.046875 1.6698C0.046875 1.52917 0.09375 1.38855 0.234375 1.2948L1.17188 0.3573Z" fill="#6F6F6F"/>
                         </svg>
                     </a>
-                    ${style}
                     `
                 );
-                setTimeout(() => editor.select(this.model), 100);
+                setTimeout(() => {
+                    editor.select(this.model)
+                }, 100);
             }
         },
 

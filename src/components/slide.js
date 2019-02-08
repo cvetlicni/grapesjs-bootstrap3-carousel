@@ -12,6 +12,7 @@ export default (editor, config = {}) => {
         defaults: {
             ...defaultModel.prototype.defaults,
             draggable: false,
+            droppable: true,
             traits: [],
             orderId: []
         },
