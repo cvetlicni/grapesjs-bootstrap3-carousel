@@ -51,7 +51,7 @@ export default (editor, config = {}) => {
                 changeProp: 1,
                 type: 'number'
             }, {
-                label: 'Number of slides',
+                label: 'Number of slides (max 20)',
                 name: 'slides',
                 changeProp: 1,
                 type: 'number'
