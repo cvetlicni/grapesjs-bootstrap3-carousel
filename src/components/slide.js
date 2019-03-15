@@ -94,20 +94,28 @@ export default (editor, config = {}) => {
             this.model.set('shouldRefresh', false);
             this.model.set('carouselSlides', this.model.parent().get('slides'));
             this.updateSlides();
+            this.handleCopyPermissions();
             this.model.parent().view.updateNumSlides();
             this.model.set('shouldRefresh', true);
         },
 
-        isSlideLimitIsReached() {
-            const isMaxSlides = this.model.parent().get('slides') > 20;
+        handleCopyPermissions() {
             const comps = this.model.get('components');
-            if ((comps.length < 20 && isMaxSlides) || (comps.length >= 20 && !isMaxSlides)) {
-                [...Array(comps.length).keys()].forEach((i) => {
-                    comps.at(i).set('copyable', !isMaxSlides);
-                });
+            const isCopyable = comps.length < 20;
+            [...Array(comps.length).keys()].forEach((i) => {
+                comps.at(i).set('copyable', isCopyable);
+            });
+        },
+
+        isSlideLimitIsReached() {
+            const slides = this.model.parent().get('slides');
+            const isMaxSlides = slides > 20;
+            if (isMaxSlides) {
+                this.model.parent().set('slides', 20);
+                return true;
             }
 
-            if (isMaxSlides) {
+            if (slides > 20) {
                 this.model.parent().set('slides', 20);
                 return true;
             } else {
